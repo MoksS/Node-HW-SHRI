@@ -14,16 +14,31 @@ const inst = axios.create({
 module.exports.getSetting = async (req, res) => {
   const result = await inst.get("/conf");
 
-  console.log("jopa", result.data);
   res.status(200).json({
     status: result.status,
     statusText: result.statusText,
-    data: result.data
+    data: result.data.data
   });
 };
 
-module.exports.getBuilds = (req, res) => {
-  res.send("builds");
+module.exports.getBuilds = async (req, res) => {
+  const { query } = req;
+  const offset = query.offset || 0;
+  const limit = query.limit || 25;
+  try {
+    const buildList = await inst.get(`/build/list?offset=${offset}&limit=${limit}`);
+
+    res.status(200).json({
+      data: buildList.data.data
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      data: "Error",
+      error
+    })
+  }
 }
 
 module.exports.getBuildId = (req, res) => {
@@ -36,8 +51,6 @@ module.exports.getLogs = (req, res) => {
 
 module.exports.postSetting = async (req, res) => {
   try {
-    const del = await inst.delete("/conf");
-    console.log("delete", del.config.baseURL + del.config.url, del.status, del.statusText, del.data);
     const setConf = await inst.post("/conf",
       {
         repoName: req.body.repoName,
@@ -48,22 +61,38 @@ module.exports.postSetting = async (req, res) => {
 
     console.log("POST", setConf.config.baseURL + setConf.config.url, setConf.status, setConf.statusText, setConf.data);
 
-    return res.json({
-      status: setConf.status,
-      statusText: setConf.statusText,
+    return res.status(200).json({
       data: "Success"
     });
   } catch (error) {
     console.log(error);
 
-    return res.status(404).json({
-      status: 404,
+    return res.status(500).json({
       data: "Error",
       error
     });
   }
 }
 
-module.exports.postCommitHash = (req, res) => {
-  res.send(`${req.params.commitHash}`)
+module.exports.postCommitHash = async (req, res) => {
+  try {
+    await inst.post("/build/request",
+      {
+        commitMessage: req.body.commitMessage,
+        commitHash: req.params.commitHash,
+        branchName: req.body.branchName,
+        authorName: req.body.authorName
+      });
+
+    return res.status(200).json({
+      data: "Success"
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      data: "Error",
+      error
+    });
+  }
 }
