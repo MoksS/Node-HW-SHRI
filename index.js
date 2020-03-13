@@ -2,9 +2,15 @@ const express = require("express");
 require("dotenv").config();
 
 const app = express();
+const compression = require('compression');
 const apiRouter = require("./router/apiRouter");
 const { join } = require("path");
 
+app.use(compression());
+app.use((req,res, next) => {
+  res.set("X-Powered-By", "MoksS");
+  next();
+})
 app.use(express.static(join(__dirname, "static")));
 
 app.use("/api", apiRouter);
@@ -34,3 +40,18 @@ app.listen(3000, err => {
         console.log("Port 3000");
     }
 })
+
+// const { spawn } = require("child_process");
+
+// const git = spawn("git", ["clone", "https://github.com/necolas/normalize.css.git"]).stderr.pipe(process.stdout);
+
+// const util = require('util');
+// const exec = util.promisify(require('child_process').exec);
+
+// async function lsExample() {
+//   const { stdout, stderr } = await exec('git clone https://github.com/necolas/normalize.css.git');
+//   console.log('stdout:', stdout);
+//   console.error('stderr:', stderr);
+// }
+// lsExample();
+
