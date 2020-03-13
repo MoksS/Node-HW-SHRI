@@ -1,12 +1,11 @@
 const express = require("express");
 require("dotenv").config();
-console.log(process.env.TOKEN);
+
 const app = express();
-const apiRouter = require("./router/api");
+const apiRouter = require("./router/apiRouter");
 const { join } = require("path");
 
 app.use(express.static(join(__dirname, "static")));
-
 
 app.use("/api", apiRouter);
 
