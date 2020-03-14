@@ -6,7 +6,7 @@ const httpsAgent = new Agent({
 
 const inst = axios.create({
   baseURL: 'https://hw.shri.yandex/api',
-  timeout: 1000,
+  timeout: 3000,
   headers: { 'Authorization': `Bearer ${process.env.TOKEN}` },
   httpsAgent
 });
@@ -41,14 +41,34 @@ module.exports.getBuilds = async (req, res) => {
   }
 }
 
-module.exports.getBuildId = (req, res) => {
-  res.send(`${req.params.buildId}`);
+module.exports.getBuildId = async (req, res) => {
+  try {
+    const infoBuild = await inst.get(`/build/details?buildId=${req.params.buildId}`)
+    return res.status(200).json({
+      data: infoBuild.data.data
+    })
+  } catch (error) {
+    return res.status(404).json({
+      data: "bad request"
+    })
+  }
 };
 
-module.exports.getLogs = (req, res) => {
-  res.send(`${req.url}`);
+//8d98d0b8-6576-426a-9631-981844c0edbf
+module.exports.getLogs = async (req, res) => {
+  try {
+    const log = await inst.get(`/build/log?buildId=${req.params.buildId}`)
+    return res.status(200).json({
+      data: log.data
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      data: "bad request"
+    });
+  }
 };
-
+;
 module.exports.postSetting = async (req, res) => {
   try {
     const setConf = await inst.post("/conf",
