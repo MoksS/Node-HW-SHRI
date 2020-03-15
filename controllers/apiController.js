@@ -12,6 +12,7 @@ const inst = axios.create({
   headers: { Authorization: `Bearer ${process.env.TOKEN}` },
   httpsAgent
 });
+module.exports.inst = inst;
 
 module.exports.getSetting = async (req, res) => {
   const result = await inst.get("/conf");
@@ -58,7 +59,6 @@ module.exports.getBuildId = async (req, res) => {
   }
 };
 
-// 8d98d0b8-6576-426a-9631-981844c0edbf
 module.exports.getLogs = async (req, res) => {
   try {
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
@@ -73,10 +73,11 @@ module.exports.getLogs = async (req, res) => {
   }
 };
 module.exports.postSetting = async (req, res) => {
+  const { body } = req;
   try {
     await inst.delete("/conf");
 
-    const clone = await git.clone(req.body.repoName);
+    const clone = await git.clone(body.repoName);
     if (!clone) {
       return res.status(400).json({
         success: false,
@@ -85,11 +86,26 @@ module.exports.postSetting = async (req, res) => {
     }
 
     await inst.post("/conf", {
-      repoName: req.body.repoName,
-      buildCommand: req.body.buildCommand,
-      mainBranch: req.body.mainBranch,
-      period: req.body.period
+      repoName: body.repoName,
+      buildCommand: body.buildCommand,
+      mainBranch: body.mainBranch,
+      period: body.period
     });
+
+    process.conf.repoName = body.repoName;
+    process.conf.buildCommand = body.buildCommand;
+    process.conf.mainBranch = body.mainBranch;
+    process.conf.period = body.period;
+
+    const lastCommit = await git.lastCommit();
+    process.conf.lastCommitHash = lastCommit.commitHash;
+
+    await inst.post("/build/request", lastCommit);
+
+    if (process.conf.period > 0) {
+      clearInterval(process.gitEvent);
+      process.gitEvent = setInterval(git.gitEvent, process.conf.period * 6000);
+    }
 
     return res.status(200).json({
       success: true
