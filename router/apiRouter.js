@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 
 const apiController = require("../controllers/apiController");
@@ -9,5 +10,9 @@ router.get("/builds/:buildId", apiController.getBuildId);
 router.get("/builds/:buildId/logs", apiController.getLogs);
 
 router.post("/settings", express.json(), apiController.postSetting);
-router.post("/builds/:commitHash",express.json(), apiController.postCommitHash);
+router.post(
+  "/builds/:commitHash",
+  express.json(),
+  apiController.postCommitHash
+);
 module.exports = router;
