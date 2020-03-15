@@ -4,7 +4,7 @@
   "description": "node js server for ci",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js --ignore repositories",
+    "test": "nodemon index.js --ignore builds",
     "product": "NODE_ENV=production node index.js"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "express": "^4.17.1",
+    "nodegit": "^0.26.5",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }

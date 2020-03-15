@@ -17,8 +17,6 @@ module.exports.getSetting = async (req, res) => {
   const result = await inst.get("/conf");
 
   res.status(200).json({
-    status: result.status,
-    statusText: result.statusText,
     data: result.data.data
   });
 };
@@ -76,11 +74,13 @@ module.exports.getLogs = async (req, res) => {
 };
 module.exports.postSetting = async (req, res) => {
   try {
-    const clone = await git.clone(req.body.repoName);
+    await inst.delete("/conf");
 
-    if (clone.startsWith("fatal")) {
-      return res.status(404).json({
-        data: clone
+    const clone = await git.clone(req.body.repoName);
+    if (!clone) {
+      return res.status(400).json({
+        success: false,
+        error: "такого репозетория не существует"
       });
     }
 
@@ -92,13 +92,13 @@ module.exports.postSetting = async (req, res) => {
     });
 
     return res.status(200).json({
-      data: clone
+      success: true
     });
   } catch (error) {
     console.log(error);
 
     return res.status(500).json({
-      data: clone,
+      success: false,
       error
     });
   }
