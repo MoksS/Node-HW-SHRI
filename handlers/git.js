@@ -2,8 +2,19 @@ const git = require("nodegit");
 const path = require("path");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
+const axios = require("axios");
+const { Agent } = require("https");
 
-const { inst } = require("../controllers/apiController");
+const httpsAgent = new Agent({
+  rejectUnauthorized: false
+});
+
+const inst = axios.create({
+  baseURL: "https://hw.shri.yandex/api",
+  timeout: 3000,
+  headers: { Authorization: `Bearer ${process.env.TOKEN}` },
+  httpsAgent
+});
 
 async function removeRep(name) {
   try {
@@ -86,15 +97,18 @@ const checkLog = async () => {
 };
 
 const gitEvent = async () => {
-  const commits = await checkLog();
-  console.log(commits);
+  try {
+    const commits = await checkLog();
+    console.log(commits);
 
-  if (commits.length > 0) {
-    process.conf.lastCommitHash = commits[0].commitHash;
-
-    commits.forEach(commit => {
-      inst.post("/build/request", commit).catch(e => console.log(e));
-    });
+    if (commits.length > 0) {
+      await Promise.all(
+        commits.map(commit => inst.post("/build/request", commit))
+      );
+      process.conf.lastCommitHash = commits[0].commitHash;
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
