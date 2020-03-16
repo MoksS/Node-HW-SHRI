@@ -6,9 +6,7 @@ const compression = require("compression");
 const { join } = require("path");
 const apiRouter = require("./router/apiRouter");
 
-process.conf = {
-  repName: "MoksS-homework-verstka-"
-};
+process.conf = {};
 
 app.use(compression());
 app.use((req, res, next) => {

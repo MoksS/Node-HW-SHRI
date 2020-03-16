@@ -16,8 +16,7 @@ class Cache {
       readStream.on("close", () => {
         resolve(true);
       });
-      readStream.on("error", err => {
-        console.log("Ошибка", err);
+      readStream.on("error", () => {
         resolve(false);
       });
     });

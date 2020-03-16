@@ -2,23 +2,11 @@ const git = require("nodegit");
 const path = require("path");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const axios = require("axios");
-const { Agent } = require("https");
+const { inst } = require("./axios");
 
-const httpsAgent = new Agent({
-  rejectUnauthorized: false
-});
-
-const inst = axios.create({
-  baseURL: "https://hw.shri.yandex/api",
-  timeout: 3000,
-  headers: { Authorization: `Bearer ${process.env.TOKEN}` },
-  httpsAgent
-});
-
-async function removeRep(name) {
+async function removeRep() {
   try {
-    await exec(`rm -rf ./builds/${name}`);
+    await exec(`rm -rf ./builds/*`); // я надеюсь мак или винда могут в эти команды((
     return "ok";
   } catch (e) {
     return e;
@@ -27,8 +15,10 @@ async function removeRep(name) {
 
 const clone = async name => {
   try {
-    if (process.conf.repName !== undefined) {
-      await removeRep(process.conf.repName);
+    if (process.conf.repName !== name) {
+      await removeRep();
+    } else {
+      return "ok";
     }
 
     const repPath = path.resolve(
@@ -40,9 +30,17 @@ const clone = async name => {
     await git.Clone(`https://github.com/${name}`, repPath);
     process.conf.repName = name.replace("/", "-");
 
-    return true;
+    return "ok";
   } catch (error) {
-    return false;
+    console.log(error);
+    switch (error.errno) {
+      case -1:
+        return "Данного репозетория не существует или требуеться аутентификация";
+      case -4:
+        return "Директория с таким именем уже существует";
+      default:
+        return "Ошибка сервера";
+    }
   }
 };
 
@@ -98,13 +96,15 @@ const checkLog = async () => {
 
 const checkCommit = async () => {
   try {
-    const commits = await checkLog();
-
+    let commits = await checkLog();
+    console.log(commits);
     if (commits.length > 0) {
-      await Promise.all(
-        commits.map(commit => inst.post("/build/request", commit))
-      );
       process.conf.lastCommitHash = commits[0].commitHash;
+      commits = commits.reverse();
+
+      for await (const commit of commits) {
+        await inst.post("/build/request", commit);
+      }
     }
   } catch (error) {
     console.log(error);

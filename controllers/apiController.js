@@ -1,32 +1,25 @@
-const axios = require("axios");
-const { Agent } = require("https");
+const { inst } = require("../handlers/axios");
 const { Cache } = require("../handlers/cache");
 const git = require("../handlers/git");
 
-const httpsAgent = new Agent({
-  rejectUnauthorized: false
-});
-
 const cache = new Cache("../cache"); // ../cache, 5000
-const date = new Date(2020, 2, 22, 3, 0, 0, 0); // Sun Mar 22 2020 03:00:00 GMT+0300 (GMT+03:00)
+const date = new Date(2020, 2, 29, 3, 0, 0, 0); // Sun Mar 29 2020 03:00:00 GMT+0300 (GMT+03:00)
 // const date = Date.now() + 10000;
 
 cache.clearCache(date);
 
-const inst = axios.create({
-  baseURL: "https://hw.shri.yandex/api",
-  timeout: 3000,
-  headers: { Authorization: `Bearer ${process.env.TOKEN}` },
-  httpsAgent
-});
-module.exports.inst = inst;
-
 module.exports.getSetting = async (req, res) => {
-  const result = await inst.get("/conf");
+  try {
+    const result = await inst.get("/conf");
 
-  res.status(200).json({
-    data: result.data.data
-  });
+    return res.status(200).json({
+      data: result.data.data
+    });
+  } catch (error) {
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
+    });
+  }
 };
 
 module.exports.getBuilds = async (req, res) => {
@@ -42,11 +35,8 @@ module.exports.getBuilds = async (req, res) => {
       data: buildList.data.data
     });
   } catch (error) {
-    console.log(error);
-
-    res.status(500).json({
-      data: "Error",
-      error
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
     });
   }
 };
@@ -60,8 +50,8 @@ module.exports.getBuildId = async (req, res) => {
       data: infoBuild.data.data
     });
   } catch (error) {
-    return res.status(404).json({
-      data: "bad request"
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
     });
   }
 };
@@ -79,9 +69,8 @@ module.exports.getLogs = async (req, res) => {
       data: log.data
     });
   } catch (error) {
-    console.log(error);
-    return res.status(404).json({
-      data: "bad request"
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
     });
   }
 };
@@ -91,10 +80,10 @@ module.exports.postSetting = async (req, res) => {
     await inst.delete("/conf");
 
     const clone = await git.clone(body.repoName);
-    if (!clone) {
+    if (clone !== "ok") {
       return res.status(400).json({
         success: false,
-        error: "такого репозетория не существует"
+        error: clone
       });
     }
 
@@ -119,7 +108,8 @@ module.exports.postSetting = async (req, res) => {
       clearInterval(process.checkCommit);
       process.checkCommit = setInterval(
         git.checkCommit,
-        process.conf.period * 60000
+        process.conf.period * 60000 // здесь устанавливается время для авто проверки новых коммитов
+        // сейчас стоит раз в минуту (если period 1)
       );
     }
 
@@ -127,11 +117,8 @@ module.exports.postSetting = async (req, res) => {
       success: true
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      success: false,
-      error
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
     });
   }
 };
@@ -149,11 +136,8 @@ module.exports.postCommitHash = async (req, res) => {
       data: "Success"
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      data: "Error",
-      error
+    return res.status(error.response.status || 404).json({
+      data: error.response.statusText || "Bad request"
     });
   }
 };
