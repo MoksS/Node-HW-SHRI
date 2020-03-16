@@ -96,10 +96,9 @@ const checkLog = async () => {
   });
 };
 
-const gitEvent = async () => {
+const checkCommit = async () => {
   try {
     const commits = await checkLog();
-    console.log(commits);
 
     if (commits.length > 0) {
       await Promise.all(
@@ -115,5 +114,5 @@ const gitEvent = async () => {
 module.exports = {
   clone,
   lastCommit,
-  gitEvent
+  checkCommit
 };

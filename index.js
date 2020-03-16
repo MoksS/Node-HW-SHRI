@@ -33,7 +33,7 @@ app.use((req, res) => {
     return;
   }
   // default to plain-text. send()
-  res.type("txt").send("Not found");
+  res.type("text").send("Not found");
 });
 
 app.listen(3000, err => {

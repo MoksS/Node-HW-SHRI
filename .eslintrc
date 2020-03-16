@@ -45,7 +45,8 @@
       "no-continue":"off",
       "no-prototype-builtins":"off",
       "no-undef":"off",
-      "no-new":"off"
+      "no-new":"off",
+      "class-methods-use-this":"off"
   },
   "globals": {
       "Atomics": true,

@@ -1,10 +1,17 @@
 const axios = require("axios");
 const { Agent } = require("https");
+const { Cache } = require("../handlers/cache");
 const git = require("../handlers/git");
 
 const httpsAgent = new Agent({
   rejectUnauthorized: false
 });
+
+const cache = new Cache("../cache"); // ../cache, 5000
+const date = new Date(2020, 2, 22, 3, 0, 0, 0); // Sun Mar 22 2020 03:00:00 GMT+0300 (GMT+03:00)
+// const date = Date.now() + 10000;
+
+cache.clearCache(date);
 
 const inst = axios.create({
   baseURL: "https://hw.shri.yandex/api",
@@ -59,9 +66,15 @@ module.exports.getBuildId = async (req, res) => {
   }
 };
 
+// 880405db-106a-48c0-9a77-0103e11f9fc7
 module.exports.getLogs = async (req, res) => {
   try {
+    const readStream = await cache.get(req.params.buildId, res);
+    if (readStream) return;
+
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
+    await cache.set(req.params.buildId, JSON.stringify({ data: log.data }));
+
     return res.status(200).json({
       data: log.data
     });
@@ -103,8 +116,11 @@ module.exports.postSetting = async (req, res) => {
     await inst.post("/build/request", lastCommit);
 
     if (process.conf.period > 0) {
-      clearInterval(process.gitEvent);
-      process.gitEvent = setInterval(git.gitEvent, process.conf.period * 6000);
+      clearInterval(process.checkCommit);
+      process.checkCommit = setInterval(
+        git.checkCommit,
+        process.conf.period * 60000
+      );
     }
 
     return res.status(200).json({
