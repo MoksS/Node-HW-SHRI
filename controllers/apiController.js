@@ -3,6 +3,7 @@ const { Cache } = require("../handlers/cache");
 const git = require("../handlers/git");
 
 const cache = new Cache("../cache"); // ../cache, 5000
+// первый запуск будет в воскресенье в 3 часа утра, после каждую неделю в это же время
 const date = new Date(2020, 2, 29, 3, 0, 0, 0); // Sun Mar 29 2020 03:00:00 GMT+0300 (GMT+03:00)
 // const date = Date.now() + 10000;
 
