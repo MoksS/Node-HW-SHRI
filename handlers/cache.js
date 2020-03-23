@@ -5,6 +5,14 @@ class Cache {
   constructor({ dir, timestamp }) {
     this.timestamp = timestamp || 3600000; // неделя в миллисекундах
     this.dir = path.resolve(__dirname, dir);
+
+    try {
+      fs.mkdirSync(this.dir); // это операция выполняеться один раз в момент инцилизации файла apiController,
+      // до того, как сервер начнет слушать порт и получать запросы.
+    } catch (error) {
+      if (error.code === "EEXIST") return;
+      console.log(error);
+    }
   }
 
   get(id, stream) {

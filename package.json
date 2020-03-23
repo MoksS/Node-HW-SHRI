@@ -9,7 +9,7 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "builds",
+      "builds/*",
       "cache/*.json"
     ]
   },
