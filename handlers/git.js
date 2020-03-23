@@ -27,7 +27,7 @@ const clone = async name => {
       name.replace("/", "-")
     );
 
-    await git.Clone(`https://github.com/${name}`, repPath);
+    await git.Clone(`${process.conf.gitUrl}${name}`, repPath);
     process.conf.repName = name.replace("/", "-");
 
     return "ok";
@@ -97,7 +97,6 @@ const checkLog = async () => {
 const checkCommit = async () => {
   try {
     let commits = await checkLog();
-    console.log(commits);
     if (commits.length > 0) {
       process.conf.lastCommitHash = commits[0].commitHash;
       commits = commits.reverse();

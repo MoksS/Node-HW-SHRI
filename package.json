@@ -8,7 +8,10 @@
     "product": "NODE_ENV=production node index.js"
   },
   "nodemonConfig": {
-    "ignore": ["builds", "cache/*.json"]
+    "ignore": [
+      "builds",
+      "cache/*.json"
+    ]
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "express": "^4.17.1",
     "nodegit": "^0.26.5",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2"
   }
 }

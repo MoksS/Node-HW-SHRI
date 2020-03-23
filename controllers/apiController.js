@@ -2,12 +2,12 @@ const { inst } = require("../handlers/axios");
 const { Cache } = require("../handlers/cache");
 const git = require("../handlers/git");
 
-const cache = new Cache("../cache"); // ../cache, 5000
-// первый запуск будет в воскресенье в 3 часа утра, после каждую неделю в это же время
-const date = new Date(2020, 2, 29, 3, 0, 0, 0); // Sun Mar 29 2020 03:00:00 GMT+0300 (GMT+03:00)
-// const date = Date.now() + 10000;
+const cache = new Cache({
+  dir: "../cache",
+  timestamp: 3600000
+});
 
-cache.clearCache(date);
+cache.clearCache();
 
 module.exports.getSetting = async (req, res) => {
   try {
@@ -64,6 +64,11 @@ module.exports.getLogs = async (req, res) => {
     if (readStream) return;
 
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
+    if (log.data.length < 1) {
+      return res.status(200).json({
+        data: "Билд не был запущен или не окончен"
+      });
+    }
     await cache.set(req.params.buildId, JSON.stringify({ data: log.data }));
 
     return res.status(200).json({
@@ -78,8 +83,6 @@ module.exports.getLogs = async (req, res) => {
 module.exports.postSetting = async (req, res) => {
   const { body } = req;
   try {
-    await inst.delete("/conf");
-
     const clone = await git.clone(body.repoName);
     if (clone !== "ok") {
       return res.status(400).json({
@@ -87,6 +90,8 @@ module.exports.postSetting = async (req, res) => {
         error: clone
       });
     }
+
+    await inst.delete("/conf");
 
     await inst.post("/conf", {
       repoName: body.repoName,

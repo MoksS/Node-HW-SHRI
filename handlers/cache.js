@@ -2,10 +2,9 @@ const fs = require("fs");
 const path = require("path");
 
 class Cache {
-  constructor(dir, timestamp) {
-    this.timestamp = timestamp || 604800000; // неделя в миллисекундах
+  constructor({ dir, timestamp }) {
+    this.timestamp = timestamp || 3600000; // неделя в миллисекундах
     this.dir = path.resolve(__dirname, dir);
-    this.invalid = 0;
   }
 
   get(id, stream) {
@@ -34,9 +33,7 @@ class Cache {
     });
   }
 
-  async clearCache(date) {
-    this.invalid = date;
-
+  async clearCache() {
     const clear = async () => {
       const dir = await fs.promises.opendir(this.dir);
       for await (const dirent of dir) {
@@ -47,11 +44,10 @@ class Cache {
         }
       }
 
-      this.invalid += this.timestamp;
-      setTimeout(clear, this.invalid - Date.now());
+      setTimeout(() => setImmediate(clear), 30000);
     };
 
-    setTimeout(clear, this.invalid - Date.now());
+    setImmediate(clear);
   }
 }
 

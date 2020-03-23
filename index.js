@@ -6,7 +6,9 @@ const compression = require("compression");
 const { join } = require("path");
 const apiRouter = require("./router/apiRouter");
 
-process.conf = {};
+process.conf = {
+  gitUrl: `https://github.com/`
+};
 
 app.use(compression());
 app.use((req, res, next) => {
