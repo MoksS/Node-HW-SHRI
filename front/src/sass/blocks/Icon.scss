@@ -1,0 +1,75 @@
+.Icon {
+  display: block;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+  &__indentRigth {
+    &-s {
+    margin-right: 8px;
+    }
+
+    &-xs {
+      margin-right: 4px;
+    }
+  }  
+
+  &__size {
+    &-default {
+      width: 24px;
+      height: 24px;
+    }
+
+    &-xl {
+      width: 28px;
+      height: 28px;
+    }
+
+    &-xs {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__img {
+    &-success {
+      background-image: url("/icon/Success.svg");
+    }
+
+    &-code {
+      background-image: url("/icon/code-commit1.svg");
+    }
+
+    &-user {
+      background-image: url("/icon/user1.svg");
+    }
+
+    &-calendar {
+      background-image: url("/icon/calendar1.svg");
+    }
+
+    &-clock {
+      background-image: url("/icon/clock.svg");
+    }
+
+    &-error {
+      background-image: url("/icon/err.svg");
+    }
+
+    &-time {
+      background-image: url("/icon/clock1.svg");
+    }
+
+    &-control {
+      background-image: url("/icon/cog1.svg");
+    }
+
+    &-close {
+      background-image: url("/icon/close.svg");
+    }
+
+    &-play {
+      background-image: url("/icon/12_play.svg");
+    }
+  }
+
+}

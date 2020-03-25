@@ -1,0 +1,113 @@
+@import "./blocks/normalize.scss";
+
+
+@font-face {
+  font-family: "YS Text";
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  src: url(//yastatic.net/s3/home/fonts/ys/1/text-regular.woff2) format("woff2"),url(//yastatic.net/s3/home/fonts/ys/1/text-regular.woff) format("woff");
+}
+@font-face {
+  font-family: "YS Text";
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  src: url(//yastatic.net/s3/home/fonts/ys/1/text-medium.woff2) format("woff2"),url(//yastatic.net/s3/home/fonts/ys/1/text-medium.woff) format("woff");
+}
+@font-face {
+  font-family: "YS Text";
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  src: url(//yastatic.net/s3/home/fonts/ys/1/text-bold.woff2) format("woff2"),url(//yastatic.net/s3/home/fonts/ys/1/text-bold.woff) format("woff");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+:root {
+  --black: #000000;
+
+  --red-500: #FF3333;
+
+  --green-500: #00B341;
+
+  --orange-100: #FFCC00;
+  --orange-200: #F2C200;
+  --orange-300: #B38F00;
+  --orange-500: #FF9A00;
+
+
+  // 50 Оттенков серого
+  --grey-10: #F2F2F2;
+  --grey-50: #F0F2F3;
+  --grey-100: #E6E6E6;
+  --grey-200: #DBDBDB;
+  --grey-300: #B3B3B3;
+  --grey-400: #D9D9D9;
+  --grey-500: #CCCCCC;
+  --grey-1000: #7f8285;
+  --grey-1100: #595959;
+
+
+  --max-width: 824px;
+  --border-radius: 4px;
+  --pointer: url("/icon/Vector.svg");
+}
+
+::placeholder {
+  color: --grey-500;
+}
+
+html, body {
+  font-family: "YS Text";
+  font-style: normal;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Page {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: var(--max-width);
+
+  &__center-on {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 824px) {
+  .Content {
+    width: 100%;
+    padding: 14px 16px 12px 16px;
+  }
+}
+
+@import "./blocks/Buttons.scss";
+@import "./blocks/Copyright.scss";
+@import "./blocks/Footer.scss";
+@import "./blocks/Header.scss";
+@import "./blocks/Link.scss";
+@import "./blocks/Logo.scss";
+@import "./blocks/Form.scss";
+@import "./blocks/Text.scss";
+@import "./blocks//Card.scss";
+@import "./blocks/Icon.scss";
+@import "./blocks/Log.scss";
+

@@ -1,0 +1,52 @@
+.Header {
+  width: 100%;
+  background: #FFFFFF;
+  padding: 10px 0px;
+
+  &_Content {
+    margin: auto;
+    max-width: var(--max-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &_Banner {
+    display: flex;
+    align-items: center;
+    flex-basis: 70%;
+    margin: 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.25px;
+
+    &__lineHeight {
+      &-l {
+        line-height: 30px;
+      }
+    }
+
+    &__color {
+      &-default {
+        color: var(--grey-1000);
+      }
+
+      &-black {
+        color: var(--black);
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 824px) {
+  .Header {
+    padding: 12px 16px;
+ 
+    &_Banner {
+     font-size: 18px;
+     line-height: 22px;
+    }
+  }
+}

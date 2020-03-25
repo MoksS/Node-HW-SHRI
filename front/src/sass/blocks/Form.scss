@@ -1,0 +1,129 @@
+.FormField {
+
+  width: 474px;
+
+  &_H2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 8px 0px;
+    color: var(--black);
+  }
+
+  &_Description {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+    color: var(--grey-1000);
+    margin: 0px 0px 22px 0px;
+  }
+}
+
+.InputForm {
+  margin: 0px 0px 18px 0px;
+
+  &__flex-active {
+    padding-top: 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &_Span {
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0px 0px 0px 8px;
+    letter-spacing: 0.06px;
+    color: var(--black);
+  }
+
+  &_Name {
+    margin: 0px 8px 6px 0px;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0.06px;
+
+    color: var(--black);
+
+    &__indent {
+
+      &-none {
+        margin:0;
+      }
+
+      &-rigth {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &_Field {
+    height: 36px;
+    padding: 9px 8px 8px 11px;
+    display: flex;
+    border: 2px solid var(--grey-400);
+    justify-content: right;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+
+    &__position {
+      &-rigth {
+        padding: 9px 0px 8px 22px;
+      }
+    }
+    
+    &__sizeWidth {
+      &-small {
+        width: 52px;
+      }
+    }
+  }
+
+  &_Field:focus-within {
+    border: 2px solid var(--grey-300);
+  }
+
+  &_Bind {
+    color: red;
+  }
+
+  &_Input {
+    padding: 0;
+    flex-grow: 1;
+    border: none;
+    font-size: 13px;
+    line-height: 15px;
+
+    &__sizeWidth {
+      &-small {
+        width: 26px;
+      }
+    }
+  }
+  
+  &_Input + .Button {
+    display: none;
+  }
+
+  &_Input:not(:placeholder-shown) + .Button {
+    display: block;
+  }
+  
+
+  &_Input:focus, &_Input:active, &_Input:hover {
+    border: none;
+    outline: 0;
+    outline-offset: 0;
+  }
+}
+
+@media only screen and (max-width: 824px) {
+  .FormField {
+    width: 100%;
+
+    &_Description {
+      margin-bottom: 14px;
+    }
+  }
+}

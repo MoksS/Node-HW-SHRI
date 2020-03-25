@@ -1,0 +1,23 @@
+.Link {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &_ATag {
+    margin-right: 12px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.06px;
+
+    color: var(--grey-1000);
+    cursor: var(--pointer), auto;
+  }
+
+  &_ATag:hover {
+    color: #E00000;
+  }
+}
