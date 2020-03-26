@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import Header from "../component/Header"
+import Header from "../component/Header";
+import Button from "../component/Button";
+import ButtonsField from "../component/ButtonsField";
 
 const Build = () => {
 
@@ -9,17 +11,21 @@ const Build = () => {
 
   return (
     <>
-      <Header text="philip1967/my-aw
-        esome-repo-with-long-long-long-repo-name" class={{ color: "black", lineHeight: "l" }}>
-        <div className="ButtonsField  ButtonsField__column-off">
-          <button className="Button Button__color-control Button__padding-control Button__height-default">
+      <Header
+        text="philip1967/my-awesome-repo-with-long-long-long-repo-name"
+        class={{ color: "black", lineHeight: "l" }}>
+
+        <ButtonsField style={{column: "off"}}>
+          <Button style={{ color: "control", padding: "control", height: "default" }}>
             <span className="Icon Icon__size-xl Icon__img-play"></span>
             <span className="Text Text__size-m Text__lineHeight-xxl Text__weight-small Text__color-default Text__hide-on">Run build</span>
-          </button>
-          <button className="Button Button__color-control Button__indentLeft-s Button__height-default">
+          </Button>
+
+          <Button style={{ color: "control", indentLeft: "s", height: "default" }}>
             <span className="Icon Icon__size-xl Icon__img-control"></span>
-          </button>
-        </div>
+          </Button>
+        </ButtonsField>
+  
       </Header>
 
       <div className="Content">
@@ -279,11 +285,11 @@ const Build = () => {
             </div>
           </div>
         </div>
-        <div className="ButtonsField ">
-          <button className="Button Button__color-control Button__padding-action Button__indentBottom-xl">
+        <ButtonsField>
+          <Button style={{ color: "control", padding: "action", indentBottom: "xl" }}>
             <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Show more</span>
-          </button>
-        </div>
+          </Button>
+        </ButtonsField>
       </div>
     </>
   )

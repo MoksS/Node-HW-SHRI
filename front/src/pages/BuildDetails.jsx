@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../component/Header";
+import ButtonsField from "../component/ButtonsField";
+import Button from "../component/Button";
 
 const main = "jajaja"
 
@@ -13,18 +15,20 @@ const BuildDetails = () => {
 
   return (
     <>
-      <Header text="philip1967/my-aw
-        esome-repo-with-long-long-long-repo-name" class={{ color: "black", lineHeight: "l" }}>
-        <div className="ButtonsField  ButtonsField__column-off">
-          <button
-            className="Button Button__color-control Button__padding-control Button__height-default">
+      <Header
+        text="philip1967/my-awesome-repo-with-long-long-long-repo-name"
+        class={{ color: "black", lineHeight: "l" }}>
+
+        <ButtonsField style={{ column: "off" }}>
+          <Button style={{ color: "control", padding: "control", height: "default" }}>
             <span className="Icon Icon__size-xl Icon__img-rebuild"></span>
             <span className="Text Text__size-m Text__lineHeight-xxl Text__weight-small Text__color-default Text__hide-on">Rebuild</span>
-          </button>
-          <button className="Button Button__color-control Button__indentLeft-s Button__height-default">
+          </Button>
+
+          <Button style={{ color: "control", indentLeft: "s", height: "default" }}>
             <span className="Icon Icon__size-xl Icon__img-control"></span>
-          </button>
-        </div>
+          </Button>
+        </ButtonsField>
       </Header>
 
       <div className="Content">

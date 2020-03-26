@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "../component/Header";
+import ButtonsField from "../component/ButtonsField";
+import Button from "../component/Button";
 
 const Settings = () => {
 
@@ -9,7 +11,7 @@ const Settings = () => {
 
   return (
     <>
-      <Header text="School CI server"/>
+      <Header text="School CI server" />
 
       <div className="Content">
         <div className="FormField">
@@ -20,9 +22,9 @@ const Settings = () => {
             <p className="InputForm_Name">GitHub repository <span className="InputForm_Bind">*</span></p>
             <div className="InputForm_Field">
               <input className="InputForm_Input" type="text" placeholder="user-name/repo-name" name="reposetory" />
-              <button className="Button Button__color-close">
+              <Button style={{ color: "close" }}>
                 <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -30,9 +32,9 @@ const Settings = () => {
             <p className="InputForm_Name">Build command</p>
             <div className="InputForm_Field">
               <input className="InputForm_Input" id="command" type="text" placeholder="npm ci && npm run build" defaultValue="npm ci && npm run build" />
-              <button className="Button Button__color-close">
+              <Button style={{ color: "close" }}>
                 <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -40,9 +42,9 @@ const Settings = () => {
             <p className="InputForm_Name">Main branch</p>
             <div className="InputForm_Field">
               <input className="InputForm_Input" type="text" defaultValue="master" placeholder="master" />
-              <button className="Button Button__color-close">
+              <Button style={{ color: "close" }}>
                 <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -54,14 +56,14 @@ const Settings = () => {
             <span className="InputForm_Span">minutes</span>
           </div>
 
-          <div className="ButtonsField ButtonsField__indent-topXl">
-            <button className="Button Button__indentRigth-s Button__indentBottom-s Button__height-action Button__color-action Button__padding-action">
+          <ButtonsField style={{ indent: "topXl" }}>
+            <Button style={{indentRigth: "s", indentBottom: "s", height:"action", color: "action", padding: "action"}}>
               <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Save</span>
-            </button>
-            <button className="Button Button__color-control Button__padding-action Button__height-action Button__indentBottom-xl">
+            </Button>
+            <Button style={{color: "control", padding: "action", height: "action", indentBottom: "xl"}}>
               <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Cancel</span>
-            </button>
-          </div>
+            </Button>
+          </ButtonsField>
         </div>
       </div>
     </>
