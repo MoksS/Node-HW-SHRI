@@ -5,24 +5,24 @@
   &_H2 {
     font-style: normal;
     font-weight: 700;
-    font-size: 15px;
-    line-height: 20px;
-    margin: 8px 0px;
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-l);
+    margin: var(--space-xxxs) 0px;
     color: var(--black);
   }
 
   &_Description {
     font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: var(--font-size-l);
+    line-height: var(--line-height-m);
     letter-spacing: 0.06px;
     color: var(--grey-1000);
-    margin: 0px 0px 22px 0px;
+    margin: 0px 0px var(--space-xxl) 0px;
   }
 }
 
 .InputForm {
-  margin: 0px 0px 18px 0px;
+  margin: 0px 0px var(--space-l) 0px;
 
   &__flex-active {
     padding-top: 1px;
@@ -31,17 +31,17 @@
     align-items: center;
   }
   &_Span {
-    font-size: 13px;
-    line-height: 18px;
-    margin: 0px 0px 0px 8px;
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-m);
+    margin: 0px 0px 0px var(--space-xxxs);
     letter-spacing: 0.06px;
     color: var(--black);
   }
 
   &_Name {
-    margin: 0px 8px 6px 0px;
-    font-size: 13px;
-    line-height: 18px;
+    margin: 0px var(--space-xxxs) var(--space-xxxxs) 0px;
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-m);
     letter-spacing: 0.06px;
 
     color: var(--black);
@@ -53,14 +53,14 @@
       }
 
       &-rigth {
-        margin-right: 8px;
+        margin-right: var(--space-xxxs);
       }
     }
   }
 
   &_Field {
     height: 36px;
-    padding: 9px 8px 8px 11px;
+    padding: 9px var(--space-xxxs) var(--space-xxxs) 11px;
     display: flex;
     border: 2px solid var(--grey-400);
     justify-content: right;
@@ -69,7 +69,7 @@
 
     &__position {
       &-rigth {
-        padding: 9px 0px 8px 22px;
+        padding: 9px 0px var(--space-xxxs) var(--space-xxl);
       }
     }
     
@@ -92,8 +92,8 @@
     padding: 0;
     flex-grow: 1;
     border: none;
-    font-size: 13px;
-    line-height: 15px;
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-xs);
 
     &__sizeWidth {
       &-small {

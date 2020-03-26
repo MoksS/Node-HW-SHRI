@@ -4,15 +4,15 @@
 
   &__size {
     &-m {
-      font-size: 13px;
+      font-size:  var(--font-size-l);
     }
 
     &-s {
-      font-size: 15px;
+      font-size: var(--font-size-xl);
     }
 
     &-l {
-      font-size: 18px;
+      font-size: var(--font-size-xxxl);
     }
   }
 
@@ -28,18 +28,18 @@
 
   &__lineHeight {
     &-xxxxl {
-      line-height: 36px;
+      line-height: var(--line-height-xxxxl);
     }
     &-xxl {
-      line-height: 28px;
+      line-height: var(--line-height-xxl);
     }
 
     &-xl {
-      line-height: 20px;
+      line-height: var(--line-height-l);
     }
 
     &-l {
-      line-height: 16px;
+      line-height: var(--line-height-s);
     }
   }
 
@@ -81,7 +81,7 @@
     }
 
     &-m {
-      margin-right: 10px;
+      margin-right: var(--space-xxs);
     }
   }
 

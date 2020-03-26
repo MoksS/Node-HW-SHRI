@@ -13,11 +13,11 @@
   }
 
   &_Text {
-    margin: 10px 26px 0px 26px; // костыли для pixel perfect
+    margin: var(--space-xxs) 26px 0px 26px; // костыли для pixel perfect
     font-family: "YS Text";
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size:  var(--font-size-l);
     line-height: 125%;
     /* or 16px */
     text-align: center;

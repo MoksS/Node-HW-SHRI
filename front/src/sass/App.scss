@@ -29,6 +29,39 @@
 
 
 :root {
+
+  --space-xxxxs: 6px;
+  --space-xxxs: 8px;
+  --space-xxs: 10px;
+  --space-xs: 12px;
+  --space-s: 13px;
+  --space-m: 16px;
+  --space-l: 18px;
+  --space-xl: 20px;
+  --space-xxl: 22px;
+  --space-xxxl: 24px;
+  --space-xxxxl: 30px;
+  --space-xxxxxl: 32px;
+
+
+  --font-size-s: 8px;
+  --font-size-m: 10px;
+  --font-size-l: 13px;
+  --font-size-xl: 15px;
+  --font-size-xxl: 16px;
+  --font-size-xxxl: 18px;
+  --font-size-xxxxl: 24px;
+
+
+  --line-height-xs: 15px;
+  --line-height-s: 16px;
+  --line-height-m: 18px;
+  --line-height-l: 20px;
+  --line-height-xl: 22px;
+  --line-height-xxl: 28px;
+  --line-height-xxxl: 30px;
+  --line-height-xxxxl: 36px;
+
   --black: #000000;
 
   --red-500: #FF3333;
@@ -95,7 +128,7 @@ a {
 @media only screen and (max-width: 824px) {
   .Content {
     width: 100%;
-    padding: 14px 16px 12px 16px;
+    padding: 14px var(--space-m) var(--space-xs) var(--space-m);
   }
 }
 

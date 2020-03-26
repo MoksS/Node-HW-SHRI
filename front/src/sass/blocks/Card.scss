@@ -3,7 +3,7 @@
   flex-direction: row;
   box-shadow: 0px 1px 1px #4344454d, 0px 0px 1px #4344454d;
   border-radius: 6px;
-  padding: 12px 24px;
+  padding: var(--space-xs) var(--space-xxxl);
   justify-content: space-between;
 
   &__indentBottom { 
@@ -12,11 +12,11 @@
     }
 
     &-s {
-      margin-bottom: 8px;
+      margin-bottom: var(--space-xxxs);
     }
 
     &-l {
-      margin-bottom: 10px;
+      margin-bottom: var(--space-xxs);
     }
   }
 
@@ -33,7 +33,7 @@
     justify-content: space-between;
 
     &__marginLeftTop-on {
-      margin-top: 8px;
+      margin-top: var(--space-xxxs);
       margin-left: 31px;
     }
 
@@ -58,11 +58,11 @@
       }
 
       &-s {
-        margin-bottom: 8px;
+        margin-bottom: var(--space-xxxs);
       }
 
       &-l {
-        margin-bottom: 10px;
+        margin-bottom: var(--space-xxs);
       }
     }
   }
@@ -90,13 +90,13 @@
 
     &__indentLeft {
       &-xxl {
-        margin-left: 32px;
+        margin-left: var(--space-xxxxxl);
       }
     }
 
     &__border-bottom {
       border-bottom: 1px solid var(--grey-50);
-      padding-bottom: 8px;
+      padding-bottom: var(--space-xxxs);
     }
   }
 
@@ -111,7 +111,7 @@
       }
 
       &-l {
-        margin-right: 10px;
+        margin-right: var(--space-xxs);
       }
     }
   }
@@ -140,7 +140,7 @@
     flex-direction: column;
 
     &_Date {
-      margin-top: 8px;
+      margin-top: var(--space-xxxs);
       margin-left: 36px;
       flex-direction: row;
       justify-content: flex-start;
@@ -164,11 +164,11 @@
     }
 
     &_Branch {
-      margin-bottom: 8px;
+      margin-bottom: var(--space-xxxs);
     }
 
     &_User {
-      margin-bottom: 8px;
+      margin-bottom: var(--space-xxxs);
     }
   }
 }

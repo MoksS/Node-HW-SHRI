@@ -6,11 +6,11 @@
   align-items: center;
 
   &_ATag {
-    margin-right: 12px;
+    margin-right: var(--space-xs);
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size:  var(--font-size-l);
+    line-height: var(--font-size-xxl);
     letter-spacing: 0.06px;
 
     color: var(--grey-1000);

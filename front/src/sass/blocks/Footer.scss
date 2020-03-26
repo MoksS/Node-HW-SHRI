@@ -17,7 +17,7 @@
   .Footer {
 
     &_Content {
-      padding: 12px 16px;
+      padding: var(--space-xs) var(--space-m);
       flex-direction: column;
     }
   }
