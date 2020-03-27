@@ -1,0 +1,96 @@
+.Input {
+  margin: 0px 0px var(--space-l) 0px;
+
+  &__flex-active {
+    padding-top: 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &_Span {
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-m);
+    margin: 0px 0px 0px var(--space-xxxs);
+    letter-spacing: 0.06px;
+    color: var(--black);
+  }
+
+  &_Head {
+    margin: 0px var(--space-xxxs) var(--space-xxxxs) 0px;
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-m);
+    letter-spacing: 0.06px;
+
+    color: var(--black);
+
+    &__indent {
+
+      &-none {
+        margin:0;
+      }
+
+      &-rigth {
+        margin-right: var(--space-xxxs);
+      }
+    }
+  }
+
+  &_Field {
+    height: 36px;
+    padding: 9px var(--space-xxxs) var(--space-xxxs) 11px;
+    display: flex;
+    border: 2px solid var(--grey-400);
+    justify-content: right;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+
+    &__position {
+      &-rigth {
+        padding: 9px 0px var(--space-xxxs) var(--space-xxl);
+      }
+    }
+    
+    &__sizeWidth {
+      &-small {
+        width: 52px;
+      }
+    }
+  }
+
+  &_Field:focus-within {
+    border: 2px solid var(--grey-300);
+  }
+
+  &_Bind {
+    color: red;
+  }
+
+  &_Input {
+    padding: 0;
+    flex-grow: 1;
+    border: none;
+    font-size:  var(--font-size-l);
+    line-height: var(--line-height-xs);
+
+    &__sizeWidth {
+      &-small {
+        width: 26px;
+      }
+    }
+  }
+  
+  &_Input + .Button {
+    display: none;
+  }
+
+  &_Input:not(:placeholder-shown) + .Button {
+    display: block;
+  }
+  
+
+  &_Input:focus, &_Input:active, &_Input:hover {
+    border: none;
+    outline: 0;
+    outline-offset: 0;
+  }
+}

@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import Header from "../component/Header";
 import Button from "../component/Button";
 import ButtonsField from "../component/ButtonsField";
+import Icon from "../component/Icon";
+import Text from "../component/Text";
+import Card from "../component/Card";
+import Date from "../component/Date";
 
 const Build = () => {
 
@@ -15,20 +19,34 @@ const Build = () => {
         text="philip1967/my-awesome-repo-with-long-long-long-repo-name"
         class={{ color: "black", lineHeight: "l" }}>
 
-        <ButtonsField style={{column: "off"}}>
+        <ButtonsField style={{ column: "off" }}>
           <Button style={{ color: "control", padding: "control", height: "default" }}>
-            <span className="Icon Icon__size-xl Icon__img-play"></span>
-            <span className="Text Text__size-m Text__lineHeight-xxl Text__weight-small Text__color-default Text__hide-on">Run build</span>
+            <Icon style={{ size: "xl", img: "play" }} />
+            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Run build</Text>
           </Button>
 
           <Button style={{ color: "control", indentLeft: "s", height: "default" }}>
-            <span className="Icon Icon__size-xl Icon__img-control"></span>
+            <Icon style={{ size: "xl", img: "control" }} />
           </Button>
         </ButtonsField>
-  
       </Header>
 
       <div className="Content">
+
+        <Card
+          status="success"
+          number="1368"
+          commit="add documentation for postgres scaler"
+          branch="master"
+          author="Philip Kirkorov"
+          hash="9c9f0b9"
+        >
+          <Date 
+            startDate="21 янв, 03:06"
+            duration="1 ч 20 мин"
+          />  
+        </Card>
+
         <div className="Card Card__indentBottom-s">
           <div className="Card_Info">
             <div className="Card_Build Card_Build__indentBottom-s">
@@ -50,12 +68,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -82,12 +100,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -114,12 +132,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -146,12 +164,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -178,12 +196,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -210,12 +228,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -242,12 +260,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -274,12 +292,12 @@ const Build = () => {
               </div>
             </div>
           </div>
-          <div className="Card_Date">
-            <div className="Card_Day">
+          <div className="Date">
+            <div className="Date_Day">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m">21 янв, 03:06</span>
             </div>
-            <div className="Card_Hour">
+            <div className="Date_Hour">
               <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
               <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary">1 ч 20 мин</span>
             </div>
@@ -287,7 +305,7 @@ const Build = () => {
         </div>
         <ButtonsField>
           <Button style={{ color: "control", padding: "action", indentBottom: "xl" }}>
-            <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Show more</span>
+            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Show more</Text>
           </Button>
         </ButtonsField>
       </div>

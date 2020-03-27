@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../component/Button";
-import Text from "../component/Text";
+import Button from "./Button";
+import Text from "./Text";
 
 const Logo = () => (
   <>

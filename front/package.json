@@ -7,18 +7,21 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "ansi-to-html": "^0.6.14",
     "i": "^0.3.6",
     "node-sass": "^4.13.1",
     "npm": "^6.14.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-text-mask": "^5.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build | ansi-to-html",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "log": "git log | ansi-to-html"
   },
   "eslintConfig": {
     "extends": "react-app"

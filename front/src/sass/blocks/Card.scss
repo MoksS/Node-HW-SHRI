@@ -27,26 +27,6 @@
 
   }
 
-  &_Date {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    &__marginLeftTop-on {
-      margin-top: var(--space-xxxs);
-      margin-left: 31px;
-    }
-
-    &__row-on {
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-
-    &__DinamicColor-on {
-        color: var(--black);
-    }
-  }
-
   &_Build {
     display: flex;
     flex-direction: row;
@@ -71,16 +51,13 @@
     flex-direction: column;
   }
 
-  &_Day {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  &__column-on .Date__DinamicColor-on {
+    color: var(--black);
   }
 
-  &_Hour {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  &__column-on .Card_Commit{
+    border-bottom: 1px solid var(--grey-50);
+    padding-bottom: var(--space-xxxs);
   }
 
   &_Commit {
@@ -169,6 +146,10 @@
 
     &_User {
       margin-bottom: var(--space-xxxs);
+    }
+
+    &__column-on .Date__DinamicColor-on {
+      color: var(--grey-1100);
     }
   }
 }

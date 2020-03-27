@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import Header from "../component/Header";
+import Form from "../component/Form";
 import ButtonsField from "../component/ButtonsField";
 import Button from "../component/Button";
+import Input from "../component/Input";
+import Text from "../component/Text";
 
 const Settings = () => {
 
@@ -14,57 +17,49 @@ const Settings = () => {
       <Header text="School CI server" />
 
       <div className="Content">
-        <div className="FormField">
-          <h2 className="FormField_H2">Settings</h2>
-          <p className="FormField_Description">Configure repository connection and synchronization settings.</p>
+        <Form header="Settings" descripton="Configure repository connection and synchronization settings.">
 
-          <div className="InputForm">
-            <p className="InputForm_Name">GitHub repository <span className="InputForm_Bind">*</span></p>
-            <div className="InputForm_Field">
-              <input className="InputForm_Input" type="text" placeholder="user-name/repo-name" name="reposetory" />
-              <Button style={{ color: "close" }}>
-                <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </Button>
-            </div>
-          </div>
+          <Input
+            head="GitHub repository"
+            type="text"
+            placeholder="user-name/repo-name"
+            name="reposetory"
+            bind={true}
+          />
 
-          <div className="InputForm">
-            <p className="InputForm_Name">Build command</p>
-            <div className="InputForm_Field">
-              <input className="InputForm_Input" id="command" type="text" placeholder="npm ci && npm run build" defaultValue="npm ci && npm run build" />
-              <Button style={{ color: "close" }}>
-                <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </Button>
-            </div>
-          </div>
+          <Input
+            head="Build command"
+            type="text"
+            placeholder="npm ci && npm run build"
+            name="command"
+            bind= {true}
+          />
 
-          <div className="InputForm">
-            <p className="InputForm_Name">Main branch</p>
-            <div className="InputForm_Field">
-              <input className="InputForm_Input" type="text" defaultValue="master" placeholder="master" />
-              <Button style={{ color: "close" }}>
-                <span className="Icon Icon__size-xs Icon__img-close"></span>
-              </Button>
-            </div>
-          </div>
+          <Input 
+            head="Main branch"
+            type="text"
+            placeholder="master"
+            name="branch"
+          />
 
-          <div className="InputForm InputForm__flex-active">
-            <p className="InputForm_Name InputForm_Name__indent-none InputForm_Name__indent-rigth">Synchronize every</p>
-            <div className="InputForm_Field  InputForm_Field__sizeWidth-small InputForm_Field__position-rigth">
-              <input className="InputForm_Input InputForm_Input__sizeWidth-small" type="text" maxLength="2" placeholder="10" name="minutes" defaultValue="10" />
-            </div>
-            <span className="InputForm_Span">minutes</span>
-          </div>
+          <Input
+            head="Synchronize every"
+            placeholder="10"
+            name="minutes"
+            span="minutes"
+            textMask={[/\d/, /\d/]}
+          />
 
           <ButtonsField style={{ indent: "topXl" }}>
-            <Button style={{indentRigth: "s", indentBottom: "s", height:"action", color: "action", padding: "action"}}>
-              <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Save</span>
+            <Button style={{ indentRigth: "s", indentBottom: "s", height: "action", color: "action", padding: "action" }}>
+              <Text style={{size:"m", lineHeight:"xxxxl", weight:"small", color: "default"}}>Save</Text>
             </Button>
-            <Button style={{color: "control", padding: "action", height: "action", indentBottom: "xl"}}>
-              <span className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default">Cancel</span>
+            <Button style={{ color: "control", padding: "action", height: "action", indentBottom: "xl" }}>
+              <Text style={{size:"m", lineHeight:"xxxxl", weight:"small", color: "default"}}>Cancel</Text>
             </Button>
           </ButtonsField>
-        </div>
+
+        </Form>
       </div>
     </>
   )
