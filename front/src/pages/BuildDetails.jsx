@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import Convert from "ansi-to-html";
 import Header from "../component/Header";
 import ButtonsField from "../component/ButtonsField";
@@ -7,160 +7,107 @@ import Button from "../component/Button";
 import Icon from "../component/Icon";
 import Text from "../component/Text";
 import Card from "../component/Card";
-import Date from "../component/Date";
+import { host } from "../helpers/constant";
+import { useSelector, useDispatch } from "react-redux";
 
-const convert = new Convert();
+const convert = new Convert({ fg: '#000', bg: '#000' });
 
-const main = `Compiled successfully!
+function BuildDetails() {
+  const state = useSelector(state => state.setting);
+  const history = useHistory();
+  // все это делалость бы на сервере, я за редиректы да и первоначальные состояния
+  // но в северный рендеринг не смог ((
+  if (state !== "/build") history.push("/"); 
 
-You can now view front in the browser.
-
-  Local:            http://localhost:3000
-  On Your Network:  http://192.168.0.100:3000
-
-Note that the development build is not optimized.
-To create a production build, use npm run build.
-Starting type checking and linting service...
-Using 1 worker with 2048MB memory limit
-Hash: d54ed20309f352b3bda76cbbb6d272ed6afde438bd7a265eb08db3624c32dfc883a8c379c67f4de6
-Version: webpack 4.41.6
-Child
-Hash: d54ed20309f352b3bda7
-Time: 40364ms
-Built at: 2020-02-23 16:04:54
-Asset Size Chunks Chunk Names
-0.bundle.static.css 1.31 MiB 0 [emitted] vendors~main
-0.bundle.static.js 10.3 MiB 0 [emitted] vendors~main
-bundle.static.css 48.6 KiB 1 [emitted] main
-bundle.static.js 613 KiB 1 [emitted] main
-static/media/Cat.afa2191f.svg 9.83 KiB [emitted]
-static/media/illustration.a17c1b18.svg 14.8 KiB [emitted]
-static/media/picture.eef6f3b8.svg 16.2 KiB [emitted]
-Entrypoint main = 0.bundle.static.css 0.bundle.static.js bundle.static.css bundle.static.js
-[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
-[./src/account/actions/index.ts] 2.46 KiB {1} [built]
-[./src/account/api/lib/models/index.ts] 2.17 KiB {1} [built]
-[./src/account/api/lib/models/mappers.ts] 21 KiB {1} [built]
-[./src/account/api/lib/schoolaccountAPI.ts] 4.97 KiB {1} [built]
-[./src/account/api/lib/schoolaccountAPIContext.ts] 1.73 KiB {1} [built]
-[./src/account/epics/index.ts] 328 bytes {1} [built]
-[./src/account/epics/pageData.ts] 834 bytes {1} [built]
-[./src/account/epics/personalPage.ts] 2.29 KiB {1} [built]
-[./src/account/epics/registrationForm.ts] 910 bytes {1} [built]
-[./src/account/index.tsx] 561 bytes {1} [built]
-[./src/account/reducers/githubRepos.ts] 837 bytes {1} [built]
-[./src/account/reducers/index.ts] 1.83 KiB {1} [built]
-[./src/account/reducers/serverError.ts] 526 bytes {1} [built]
-[./src/account/store.ts] 1.05 KiB {1} [built]
-+ 1864 hidden modules
-Child
-Hash: 6cbbb6d272ed6afde438
-Time: 32877ms
-Built at: 2020-02-23 16:04:47
-Asset Size Chunks Chunk Names
-server.js 6.34 MiB main [emitted] main
-Entrypoint main = server.js
-[./src/account/actions/index.ts] 2.46 KiB {main} [built]
-[./src/account/api/lib/models/index.ts] 2.17 KiB {main} [built]
-[./src/account/api/lib/models/mappers.ts] 21 KiB {main} [built]
-[./src/account/api/lib/schoolaccountAPI.ts] 4.97 KiB {main} [built]
-[./src/account/api/lib/schoolaccountAPIContext.ts] 1.73 KiB {main} [built]
-[./src/account/epics/index.ts] 328 bytes {main} [built]
-[./src/account/epics/pageData.ts] 834 bytes {main} [built]
-[./src/account/epics/personalPage.ts] 2.29 KiB {main} [built]
-[./src/account/epics/registrationForm.ts] 910 bytes {main} [built]
-[./src/account/mappers/index.ts] 2.18 KiB {main} [built]
-[./src/account/reducers/githubRepos.ts] 837 bytes {main} [built]
-[./src/account/reducers/index.ts] 1.83 KiB {main} [built]
-[./src/account/reducers/serverError.ts] 526 bytes {main} [built]
-[./src/account/server.tsx] 1.62 KiB {main} [built]
-[./src/account/store.ts] 1.05 KiB {main} [built]
-+ 1484 hidden modules
-`
-
-console.log(convert.toHtml(main))
-
-const BuildDetails = () => {
+  const repName = useSelector(state => state.repName);
+  const buildDetails = useSelector(state => state.buildDetails);
+  const dispatch = useDispatch();
   const { number } = useParams();
+
+  const onRebuild = async (e) => {
+    try {
+      const response = await fetch(`${host}/api/builds/${buildDetails.commitHash}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(buildDetails)
+      });
+
+      const result = await response.json();
+
+      history.push(`/build/${result.data.id}`);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     document.title = `Build ${number}`;
+
+    const fetchData = async () => {
+      try {
+        const [list, log] = await Promise.all([
+          fetch(`${host}/api/builds/${number}`),
+          fetch(`${host}/api/builds/${number}/logs`)
+        ]);
+        const [json, logJson] = await Promise.all([
+          list.json(),
+          log.json()
+        ]);
+
+        json.data.log = logJson.data;
+        dispatch({ type: "updateDetails", build: json.data });
+      } catch (error) {
+        console.log(error);
+        history.push(`/build`);
+      }
+    }
+    fetchData();
+  // eslint-disable-next-line
   }, [number]);
 
   return (
     <>
       <Header
-        text="philip1967/my-awesome-repo-with-long-long-long-repo-name"
-        class={{ color: "black", lineHeight: "l" }}>
+        text={repName}
+        class={{ color: "black", lineHeight: "l" }}
+        link={"/build"}
+      >
 
         <ButtonsField style={{ column: "off" }}>
-          <Button style={{ color: "control", padding: "control", height: "default" }}>
+          <Button
+            style={{ color: "control", padding: "control", height: "default" }}
+            onClick={onRebuild}
+          >
             <Icon style={{ size: "xl", img: "rebuild" }} />
             <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Rebuild</Text>
           </Button>
-          <Button style={{ color: "control", indentLeft: "s", height: "default" }}>
-            <Icon style={{ size: "xl", img: "control" }} />
-          </Button>
+          <Link to="/settings">
+            <Button style={{ color: "control", indentLeft: "s", height: "default" }}>
+              <Icon style={{ size: "xl", img: "control" }} />
+            </Button>
+          </Link>
         </ButtonsField>
       </Header>
 
       <div className="Content">
         <Card
-          column={true}
-          status="success"
-          number="1368"
-          commit="add documentation for postgres scaler"
-          branch="master"
-          author="Philip Kirkorov"
-          hash="9c9f0b9"
-        >
-          <Date
-            style={{row: "on", marginLeftTop: "on"}}
-            startDate="21 янв, 03:06"
-            duration="1 ч 20 мин"
-          />
-        </Card>
-        <div className="Card Card__indentBottom-s Card__column-on">
-          <div className="Card_Info">
-            <div className="Card_Build Card_Build__indentBottom-s">
-              <div className="Card_Status">
-                <span className="Icon Icon__indentRigth-s Icon__size-default Icon__img-success"></span>
-                <span className="Text Text__size-l Text__weight-normal Text__lineHeight-xl Text__color-green">#1368</span>
-              </div>
-              <span
-                className="Text Text__indentLeft-xs Text__size-s Text__weight-small Text__lineHeight-xl Text__color-default">add
-            documentation for postgres scaler</span>
-            </div>
-            <div className="Card_Commit Card_Commit__border-bottom Card_Commit__indentLeft-xxl">
-              <div className="Card_Branch Card_Branch__indentRigth-l ">
-                <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-code"></span>
-                <span
-                  className="Text Text__indentRigth-xs Text__size-m Text__weight-small Text__lineHeight-l Text__color-default">master</span>
-                <span
-                  className="Text Text__indentRigth-xs Text__size-m Text__weight-small Text__lineHeight-l Text__color-hash">9c9f0b9</span>
-              </div>
-              <div className="Card_User">
-                <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-user"></span>
-                <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-default">Philip
-              Kirkorov</span>
-              </div>
-            </div>
-          </div>
-          <div className="Date Date__row-on Date__marginLeftTop-on">
-            <div className="Date_Day">
-              <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
-              <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m Date__DinamicColor-on">21 янв,
-            03:06</span>
-            </div>
-            <div className="Date_Hour">
-              <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"></span>
-              <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Date__DinamicColor-on">1 ч 20 мин</span>
-            </div>
-          </div>
-        </div>
-        <div className="Log">
-          {convert.toHtml(main)}
-        </div>
+          status={buildDetails.status}
+          number={buildDetails.buildNumber}
+          commit={buildDetails.commitMessage}
+          branch={buildDetails.branchName}
+          author={buildDetails.authorName}
+          hash={buildDetails.commitHash.substring(0, 7)}
+          start={buildDetails.start}
+          duration={buildDetails.duration}
+        />
+        <div className="Log" dangerouslySetInnerHTML={{ __html: convert.toHtml(buildDetails.log) }}></div>
+
+        {/* опасно, понимаю,но не знаю как сделать правильно, траспилировать? проверять на тег скрипт, или библиотека сама все делает?*/}
+        {/* <div className="Log" dangerouslySetInnerHTML={{ __html: convert.toHtml('\x1b[30mblack\x1b[37mwhite')}}>  */}
       </div>
     </>
   )

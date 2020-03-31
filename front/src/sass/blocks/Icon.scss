@@ -31,7 +31,7 @@
   }
 
   &__img {
-    &-success {
+    &-Success {
       background-image: url("/icon/Success.svg");
     }
 
@@ -51,11 +51,15 @@
       background-image: url("/icon/clock.svg");
     }
 
-    &-error {
+    &-Fail {
       background-image: url("/icon/err.svg");
     }
 
-    &-time {
+    &-Waiting {
+      background-image: url("/icon/clock1.svg");
+    }
+
+    &-InProgress {
       background-image: url("/icon/clock1.svg");
     }
 

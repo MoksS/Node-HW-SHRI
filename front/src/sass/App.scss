@@ -63,6 +63,7 @@
   --line-height-xxxxl: 36px;
 
   --black: #000000;
+  --white: #FFFFFF;
 
   --red-500: #FF3333;
 
@@ -72,7 +73,6 @@
   --orange-200: #F2C200;
   --orange-300: #B38F00;
   --orange-500: #FF9A00;
-
 
   // 50 Оттенков серого
   --grey-10: #F2F2F2;
@@ -146,4 +146,5 @@ a {
 @import "./blocks//Card.scss";
 @import "./blocks/Icon.scss";
 @import "./blocks/Log.scss";
+@import "./blocks//PopUp.scss";
 

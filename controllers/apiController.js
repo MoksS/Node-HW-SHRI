@@ -96,14 +96,14 @@ module.exports.postSetting = async (req, res) => {
     await inst.post("/conf", {
       repoName: body.repoName,
       buildCommand: body.buildCommand,
-      mainBranch: body.mainBranch,
-      period: body.period
+      mainBranch: body.mainBranch || "master",
+      period: body.period || 0
     });
 
     process.conf.repoName = body.repoName;
     process.conf.buildCommand = body.buildCommand;
-    process.conf.mainBranch = body.mainBranch;
-    process.conf.period = body.period;
+    process.conf.mainBranch = body.mainBranch || "master";
+    process.conf.period = body.period || 0;
 
     const lastCommit = await git.lastCommit();
     process.conf.lastCommitHash = lastCommit.commitHash;
@@ -131,19 +131,26 @@ module.exports.postSetting = async (req, res) => {
 
 module.exports.postCommitHash = async (req, res) => {
   try {
-    await inst.post("/build/request", {
+    if (req.body.commitMessage === undefined) {
+      const commit = await git.lookup(req.params.commitHash);
+
+      req.body = commit;
+    }
+
+    const result = await inst.post("/build/request", {
       commitMessage: req.body.commitMessage,
       commitHash: req.params.commitHash,
       branchName: req.body.branchName,
       authorName: req.body.authorName
     });
 
-    return res.status(200).json({
-      data: "Success"
-    });
+    result.data.data.success = true;
+
+    return res.status(200).json(result.data);
   } catch (error) {
-    return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+    console.log(error);
+    return res.status(404).json({
+      data: "Bad request"
     });
   }
 };

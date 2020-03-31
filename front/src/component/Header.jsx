@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import { withNaming } from '@bem-react/classname';
 
 const cn = withNaming({ e: '_', m: '__', v: '-' })
@@ -17,7 +18,13 @@ const Header = (props) => {
   return (
     <header className="Header">
     <div className="Header_Content">
-    <h1 className={classes}>{props.text}</h1>
+    
+    {props.link ? 
+      <Link to={props.link}>
+        <h1 className={classes}>{props.text}</h1>
+      </Link>
+      : <h1 className={classes}>{props.text}</h1>
+    }
     {props.children}
     </div>
   </header>

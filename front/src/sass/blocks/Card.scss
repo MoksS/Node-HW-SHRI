@@ -6,6 +6,12 @@
   padding: var(--space-xs) var(--space-xxxl);
   justify-content: space-between;
 
+  &__flexBasic {
+    &-80{
+      flex-basis: 80%;
+    }
+  }
+
   &__indentBottom { 
     &-xs {
       margin-bottom: 4px;

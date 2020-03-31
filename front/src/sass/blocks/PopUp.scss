@@ -1,0 +1,19 @@
+.PopUp {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.PopUp > * {
+  background-color: var(--white);
+}
+
+.PopUp > .Form {
+  padding: 7.5px 20px;
+}

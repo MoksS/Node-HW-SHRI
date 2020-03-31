@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "./Button";
 import Icon from "./Icon";
 import MaskedInput from 'react-text-mask'
 
 const Input = (props) => {
+  const inputEl = useRef(null);
+
+  const clearInput = (e) => {
+    inputEl.current.value = "";
+  }
 
   const bindInput = props.bind ? <span className="Input_Bind"> *</span> : "";
   let input;
@@ -11,7 +16,7 @@ const Input = (props) => {
   if (props.textMask !== undefined && Array.isArray(props.textMask)) {
     input = (
       <div className="Input Input__flex-active">
-        <p className="Input_Head Input_Head__indent-none Input_Head__indent-rigth">Synchronize every</p>
+        <p className="Input_Head Input_Head__indent-none Input_Head__indent-rigth">{props.head}</p>
         <div className="Input_Field  Input_Field__sizeWidth-small Input_Field__position-rigth">
           <MaskedInput 
             mask={props.textMask} 
@@ -30,7 +35,7 @@ const Input = (props) => {
   } else {
     input = (
       <div className="Input">
-        <p className="Input_Head">{props.head}{bindInput}</p>
+        <p className="Input_Head">{props.head || ""}{bindInput}</p>
         <div className="Input_Field">
           <input
             className="Input_Input"
@@ -39,8 +44,9 @@ const Input = (props) => {
             name={props.name} 
             id={props.id}
             defaultValue={props.value}
+            ref={inputEl}
           />
-          <Button style={{ color: "close" }}>
+          <Button style={{ color: "close" }} onClick={clearInput}>
             <Icon style={{ size: "xs", img: "close" }} />
           </Button>
         </div>

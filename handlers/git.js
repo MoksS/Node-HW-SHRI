@@ -110,8 +110,56 @@ const checkCommit = async () => {
   }
 };
 
+const lookup = async hash => {
+  try {
+    const name = process.conf.repoName;
+    const repPath = path.resolve(
+      __dirname,
+      "../builds",
+      name.replace("/", "-")
+    );
+    const repo = await git.Repository.open(path.resolve(repPath, ".git"));
+    await repo.fetchAll();
+    await repo.mergeBranches(
+      process.conf.mainBranch,
+      `origin/${process.conf.mainBranch}`
+    );
+
+    const firstCommit = await repo.getBranchCommit(process.conf.mainBranch);
+
+    const lastCommitHash = hash;
+    let i = 20;
+    return new Promise((res, rej) => {
+      const history = firstCommit.history(git.Revwalk.SORT.TIME);
+      history.start();
+
+      history.on("commit", commit => {
+        if (i < 0) {
+          rej(new Error({ message: "Нету такого коммита" }));
+        }
+
+        i--;
+
+        if (commit.sha() === lastCommitHash) {
+          history.removeAllListeners("commit");
+          res({
+            commitMessage: commit.message(),
+            commitHash: commit.sha(),
+            branchName: process.conf.mainBranch,
+            authorName: commit.author().name()
+          });
+        }
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports = {
   clone,
   lastCommit,
-  checkCommit
+  checkCommit,
+  lookup
 };

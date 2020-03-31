@@ -58,7 +58,7 @@
       }
 
       &:disabled {
-        background-color: var(--color-bg-disabled);
+        background-color: var(--grey-10);
       }
     }
     &-action {
@@ -72,7 +72,7 @@
       }
 
       &:disabled {
-        background-color: var(--color-bg-disabled);
+        background-color: var(--grey-10);
       }
     }
 
@@ -98,7 +98,8 @@
     }
 
     &-action {
-      height: 36px
+      height: 36px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
     }
   }
 }

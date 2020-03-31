@@ -1,12 +1,17 @@
 import React from "react";
+import Date from "../component/Date";
+import { getDate, getDuration } from "../helpers/time";
 
 const Card = (props) => {
+  const date = getDate(props.start);
+
+  const duration = getDuration(props.duration);
 
   const status = `Icon Icon__indentRigth-s Icon__size-default Icon__img-${props.status}`
 
   return (
     <div className={props.column ? "Card Card__indentBottom-s Card__column-on" : "Card Card__indentBottom-s"}>
-      <div className="Card_Info">
+      <div className="Card_Info Card__flexBasic-80">
         <div className="Card_Build Card_Build__indentBottom-s">
           <div className="Card_Status">
             <span className={status}></span>
@@ -26,7 +31,13 @@ const Card = (props) => {
           </div>
         </div>
       </div>
-      {props.children}
+      {date === false ? 
+        "" :
+        <Date
+        startDate={date}
+        duration={duration}
+      />
+      }
     </div>
 
   );
