@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Form from "./Form";
-import Input from "./Input";
-import Button from "./Button";
-import ButtonsField from "./ButtonsField";
-import { host } from "../helpers/constant";
-import Text from "./Text";
+import Form from "./../Form";
+import Input from "./../Input";
+import Button from "./../Button";
+import ButtonsField from "./../Button/ButtonsField";
+import { host } from "../../helpers/constant";
+import Text from "./../Text";
+import "./PopUp.scss";
 
 const PopUp = ({ hide }) => {
   const formEl = useRef(null);

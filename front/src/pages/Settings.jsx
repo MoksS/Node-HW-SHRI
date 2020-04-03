@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import Form from "../component/Form";
-import ButtonsField from "../component/ButtonsField";
+import ButtonsField from "../component/Button/ButtonsField";
 import Button from "../component/Button";
 import Input from "../component/Input";
 import Text from "../component/Text";

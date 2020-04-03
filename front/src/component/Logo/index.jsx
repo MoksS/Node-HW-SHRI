@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "./Button";
-import Text from "./Text";
+import Button from "./../Button";
+import Text from "./../Text";
+import "./Logo.scss";
 
 const Logo = () => (
   <>

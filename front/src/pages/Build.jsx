@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../component/Header";
 import Button from "../component/Button";
-import ButtonsField from "../component/ButtonsField";
+import ButtonsField from "../component/Button/ButtonsField";
 import Icon from "../component/Icon";
 import Text from "../component/Text";
 import Card from "../component/Card";

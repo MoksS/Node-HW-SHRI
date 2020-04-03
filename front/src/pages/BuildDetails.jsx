@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import Convert from "ansi-to-html";
 import Header from "../component/Header";
-import ButtonsField from "../component/ButtonsField";
+import ButtonsField from "../component/Button/ButtonsField";
 import Button from "../component/Button";
 import Icon from "../component/Icon";
 import Text from "../component/Text";

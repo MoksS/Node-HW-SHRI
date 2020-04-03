@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Form.scss";
 
 const Form = ({header, descripton, children, name, formRef, method}) => {
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Footer from "./component/Footer";
 import './sass/App.scss';
 import StartScreen from './pages/StartScreen';
 import Settings from './pages/Settings';
@@ -41,18 +42,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-
-      <footer className="Footer">
-        <div className="Footer_Content">
-          <div className="Link">
-            <a className="Link_ATag" href="/#">Support</a>
-            <a className="Link_ATag" href="/#">Learning</a>
-          </div>
-          <div className="Copyright">
-            <p className="Copyright_Text">© 2020 Your Name</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

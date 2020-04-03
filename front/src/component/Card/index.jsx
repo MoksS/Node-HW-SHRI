@@ -1,6 +1,7 @@
 import React from "react";
-import Date from "../component/Date";
-import { getDate, getDuration } from "../helpers/time";
+import Date from "../Date";
+import { getDate, getDuration } from "../../helpers/time";
+import "./Card.scss";
 
 const Card = (props) => {
   const date = getDate(props.start);

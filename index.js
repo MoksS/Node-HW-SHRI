@@ -7,6 +7,7 @@ const { join } = require("path");
 const apiRouter = require("./router/apiRouter");
 const apiContent = require("./router/apiContent");
 const { inst } = require("./handlers/axios");
+const git = require("./handlers/git");
 
 const getRep = async () => {
   try {

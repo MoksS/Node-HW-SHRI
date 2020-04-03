@@ -1,5 +1,6 @@
 import React from "react";
 import { withNaming } from '@bem-react/classname';
+import "./Text.scss";
 
 const cn = withNaming({ e: '_', m: '__', v: '-' })
 

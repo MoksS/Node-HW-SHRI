@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import { withNaming } from '@bem-react/classname';
+import "./Header.scss";
 
 const cn = withNaming({ e: '_', m: '__', v: '-' })
 
