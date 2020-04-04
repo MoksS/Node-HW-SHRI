@@ -8,6 +8,7 @@ import Build from './pages/Build';
 import BuildDetails from './pages/BuildDetails';
 import { host } from "./helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
+import { settingsOn, setName } from "./reducers/actions";
 
 function App() {
   const state = useSelector(state => state.setting);
@@ -19,8 +20,8 @@ function App() {
         const check = await fetch(`${host}/checkSettings`);
         const res = await check.json();
         if (res.repoName !== undefined) {
-          dispatch({type: "settingsOn"});
-          dispatch({type: "setName", name: res.repoName});
+          dispatch(settingsOn());
+          dispatch(setName(res.repoName));
         }
       } catch (error) {
         console.log(error);

@@ -9,6 +9,7 @@ import Card from "../component/Card";
 import { host } from "../helpers/constant";
 import PopUp from "../component/PopUp";
 import { useSelector, useDispatch } from "react-redux";
+import { updateList } from "../reducers/actions";
 
 const Build = () => {
   const repName = useSelector(state => state.repName);
@@ -24,7 +25,7 @@ const Build = () => {
     try {
       const list = await fetch(`${host}/api/builds?offset=${offset}&limit=${limit}`);
       const json = await list.json();
-      dispatch({ type: "updateList", build: json.data })
+      dispatch(updateList(json.data));
     } catch (error) {
       console.log(error);
     }

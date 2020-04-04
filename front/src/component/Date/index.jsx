@@ -1,14 +1,10 @@
 import React from "react";
-import { withNaming } from '@bem-react/classname';
 import "./Date.scss";
-
-const cn = withNaming({ e: '_', m: '__', v: '-' })
-const style = cn("Date");
 
 const Date = (props) => {
 
   return (
-    <div className={props.style !== undefined ? style(props.style) : "Date"}>
+    <div className="Date">
       <div className="Date_Day">
         <span className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"></span>
         <span className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m Date__DinamicColor-on">

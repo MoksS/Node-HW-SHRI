@@ -9,6 +9,7 @@ import Text from "../component/Text";
 import Card from "../component/Card";
 import { host } from "../helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
+import { updateDetails } from "../reducers/actions";
 
 const convert = new Convert({ fg: '#000', bg: '#000' });
 
@@ -59,7 +60,7 @@ function BuildDetails() {
         ]);
 
         json.data.log = logJson.data;
-        dispatch({ type: "updateDetails", build: json.data });
+        dispatch(updateDetails(json.data));
       } catch (error) {
         console.log(error);
         history.push(`/build`);
