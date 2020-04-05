@@ -7,6 +7,7 @@ import Button from "../component/Button";
 import Icon from "../component/Icon";
 import Text from "../component/Text";
 import Card from "../component/Card";
+import Preloader from "../component/Preloader";
 import { host } from "../helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
 import { updateDetails } from "../reducers/actions";
@@ -18,7 +19,7 @@ function BuildDetails() {
   const history = useHistory();
   // все это делалость бы на сервере, я за редиректы да и первоначальные состояния
   // но в северный рендеринг не смог ((
-  if (state !== "/build") history.push("/"); 
+  if (state !== "/build") history.push("/");
 
   const repName = useSelector(state => state.repName);
   const buildDetails = useSelector(state => state.buildDetails);
@@ -47,7 +48,8 @@ function BuildDetails() {
 
   useEffect(() => {
     document.title = `Build ${number}`;
-
+    console.log(number);
+    dispatch({type: "loading"});
     const fetchData = async () => {
       try {
         const [list, log] = await Promise.all([
@@ -67,7 +69,7 @@ function BuildDetails() {
       }
     }
     fetchData();
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [number]);
 
   return (
@@ -95,18 +97,22 @@ function BuildDetails() {
       </Header>
 
       <div className="Content">
-        <Card
-          status={buildDetails.status}
-          number={buildDetails.buildNumber}
-          commit={buildDetails.commitMessage}
-          branch={buildDetails.branchName}
-          author={buildDetails.authorName}
-          hash={buildDetails.commitHash.substring(0, 7)}
-          start={buildDetails.start}
-          duration={buildDetails.duration}
-        />
-        <div className="Log" dangerouslySetInnerHTML={{ __html: convert.toHtml(buildDetails.log) }}></div>
-
+        {buildDetails.loading ? 
+          <Preloader /> :
+          <>
+            <Card
+              status={buildDetails.status}
+              number={buildDetails.buildNumber}
+              commit={buildDetails.commitMessage}
+              branch={buildDetails.branchName}
+              author={buildDetails.authorName}
+              hash={buildDetails.commitHash.substring(0, 7)}
+              start={buildDetails.start}
+              duration={buildDetails.duration}
+            />
+            <div className="Log" dangerouslySetInnerHTML={{ __html: convert.toHtml(buildDetails.log) }}></div>
+          </>
+        }
         {/* опасно, понимаю,но не знаю как сделать правильно, траспилировать? проверять на тег скрипт, или библиотека сама все делает?*/}
         {/* <div className="Log" dangerouslySetInnerHTML={{ __html: convert.toHtml('\x1b[30mblack\x1b[37mwhite')}}>  */}
       </div>
