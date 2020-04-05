@@ -1,7 +1,8 @@
-export const updateList = (build = []) => {
+export const updateList = (build = [], length = 5) => {
   return {
     type: "updateList",
-    build: build
+    build: build,
+    length: length
   };
 };
 

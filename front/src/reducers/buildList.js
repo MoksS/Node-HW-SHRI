@@ -1,10 +1,16 @@
-const buildList = (state = [] , action) => {
+const buildList = (state = { build : [], finish : false } , action) => {
   switch (action.type) {
     case "updateList":
-      if (action.build.length === 0) {
-        return state;
+      if (action.build.length < action.length) {
+        return {
+          build: [...state.build, ...action.build],
+          finish: true
+        };
       }
-      return [...state, ...action.build];
+      return {
+        build: [...state.build, ...action.build],
+        finish: false
+      };
     default:
       return state;
   }

@@ -54,9 +54,14 @@ function Settings () {
         body: JSON.stringify(jsonObject)
       });
 
-      console.log(response);
       const result = await response.json();
-      
+
+      if(response.status === 400) {
+        setError(result.data);
+        bt1.removeAttribute("disabled");
+        bt2.removeAttribute("disabled");
+        return;
+      }
       if (!result.success) {
         setError(result.error);
         bt1.removeAttribute("disabled");
@@ -64,6 +69,10 @@ function Settings () {
         return;
       }
       dispatch({type: "settingsOn"});
+      dispatch({
+        type: "setName", 
+        name: jsonObject["repoName"]
+      })
       history.push("/build");
 
     } catch (error) {

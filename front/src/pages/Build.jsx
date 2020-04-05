@@ -6,10 +6,9 @@ import ButtonsField from "../component/Button/ButtonsField";
 import Icon from "../component/Icon";
 import Text from "../component/Text";
 import Card from "../component/Card";
-import { host } from "../helpers/constant";
 import PopUp from "../component/PopUp";
 import { useSelector, useDispatch } from "react-redux";
-import { updateList } from "../reducers/actions";
+import { getBuildList } from "../middleware/ajaxRequest";
 
 const Build = () => {
   const repName = useSelector(state => state.repName);
@@ -21,22 +20,12 @@ const Build = () => {
     setPopup(<PopUp hide={() => setPopup("")} />)
   }
 
-  const fetchData = async (offset = 0, limit = 5) => {
-    try {
-      const list = await fetch(`${host}/api/builds?offset=${offset}&limit=${limit}`);
-      const json = await list.json();
-      dispatch(updateList(json.data));
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
 
     document.title = "Build List";
 
-    if (buildList.length < 1) {
-      fetchData();
+    if (buildList.build.length < 1) {
+      dispatch(getBuildList());
     }
     // eslint-disable-next-line
   }, []);
@@ -67,7 +56,7 @@ const Build = () => {
       </Header>
 
       <div className="Content">
-        {buildList.map(e => (
+        {buildList.build.map(e => (
           <Link to={`/build/${e.id}`} key={e.buildNumber}>
             <Card
               status={e.status}
@@ -82,15 +71,16 @@ const Build = () => {
           </Link>
         )
         )}
-
-        <ButtonsField>
-          <Button
-            style={{ color: "control", padding: "action", indentBottom: "xl" }}
-            onClick={(e) => fetchData(buildList.length)}
-          >
-            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Show more</Text>
-          </Button>
-        </ButtonsField>
+        {buildList.finish ? "" :
+          <ButtonsField>
+            <Button
+              style={{ color: "control", padding: "action", indentBottom: "xl" }}
+              onClick={(e) => dispatch(getBuildList(buildList.build.length))}
+            >
+              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Show more</Text>
+            </Button>
+          </ButtonsField>
+        }
       </div>
       {popup}
     </>

@@ -82,6 +82,7 @@ module.exports.getLogs = async (req, res) => {
 };
 module.exports.postSetting = async (req, res) => {
   const { body } = req;
+
   try {
     const clone = await git.clone(body.repoName);
     if (clone !== "ok") {
@@ -97,7 +98,7 @@ module.exports.postSetting = async (req, res) => {
       repoName: body.repoName,
       buildCommand: body.buildCommand,
       mainBranch: body.mainBranch || "master",
-      period: body.period || 0
+      period: +body.period || 0
     });
 
     process.conf.repoName = body.repoName;
