@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "./../Form";
 import Input from "./../Input";
@@ -9,6 +9,7 @@ import Text from "./../Text";
 import "./PopUp.scss";
 
 const PopUp = ({ hide }) => {
+  const [error, setError] = useState("");
   const formEl = useRef(null);
   const history = useHistory();
   const onSaveClick = async (e) => {
@@ -19,6 +20,8 @@ const PopUp = ({ hide }) => {
     bt2.setAttribute("disabled", "disabled");
 
     try {
+      setError("");
+
       const formData = new FormData(formEl.current);
 
       const response = await fetch(`${host}/api/builds/${formData.get("commitHash")}`, {
@@ -27,11 +30,17 @@ const PopUp = ({ hide }) => {
 
       const result = await response.json();
 
-      console.log(result);
+      if(response.status >= 400) {
+        setError(result.data);
+        bt1.removeAttribute("disabled");
+        bt2.removeAttribute("disabled");
+        return;
+      }
 
       history.push(`/build/${result.data.id}`);
 
     } catch (error) {
+      setError(error);
       console.log(error);
     }
 
@@ -67,6 +76,7 @@ const PopUp = ({ hide }) => {
             <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Cancel</Text>
           </Button>
         </ButtonsField>
+        <Text style={{size: "l", weight: "normal", lineHeight: "xxl", color: "red"}}>{error}</Text>
       </Form>
     </div>
   )

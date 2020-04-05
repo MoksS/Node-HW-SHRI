@@ -25,3 +25,9 @@ export const setName = (name) => {
     name: name
   };
 };
+
+export const loading = () => {
+  return {
+    type: "loading"
+  }
+}

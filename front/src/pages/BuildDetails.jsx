@@ -8,67 +8,22 @@ import Icon from "../component/Icon";
 import Text from "../component/Text";
 import Card from "../component/Card";
 import Preloader from "../component/Preloader";
-import { host } from "../helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
-import { updateDetails } from "../reducers/actions";
+import { getBuildDetails, onRebuild } from "../middleware/ajaxRequest";
 
 const convert = new Convert({ fg: '#000', bg: '#000' });
 
 function BuildDetails() {
-  const state = useSelector(state => state.setting);
   const history = useHistory();
-  // все это делалость бы на сервере, я за редиректы да и первоначальные состояния
-  // но в северный рендеринг не смог ((
-  if (state !== "/build") history.push("/");
-
   const repName = useSelector(state => state.repName);
   const buildDetails = useSelector(state => state.buildDetails);
   const dispatch = useDispatch();
   const { number } = useParams();
 
-  const onRebuild = async (e) => {
-    try {
-      const response = await fetch(`${host}/api/builds/${buildDetails.commitHash}`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(buildDetails)
-      });
-
-      const result = await response.json();
-
-      history.push(`/build/${result.data.id}`);
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     document.title = `Build ${number}`;
-    console.log(number);
-    dispatch({type: "loading"});
-    const fetchData = async () => {
-      try {
-        const [list, log] = await Promise.all([
-          fetch(`${host}/api/builds/${number}`),
-          fetch(`${host}/api/builds/${number}/logs`)
-        ]);
-        const [json, logJson] = await Promise.all([
-          list.json(),
-          log.json()
-        ]);
 
-        json.data.log = logJson.data;
-        dispatch(updateDetails(json.data));
-      } catch (error) {
-        console.log(error);
-        history.push(`/build`);
-      }
-    }
-    fetchData();
+    dispatch(getBuildDetails(number, history));
     // eslint-disable-next-line
   }, [number]);
 
@@ -83,7 +38,7 @@ function BuildDetails() {
         <ButtonsField style={{ column: "off" }}>
           <Button
             style={{ color: "control", padding: "control", height: "default" }}
-            onClick={onRebuild}
+            onClick={() => onRebuild(buildDetails, history)}
           >
             <Icon style={{ size: "xl", img: "rebuild" }} />
             <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Rebuild</Text>

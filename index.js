@@ -40,8 +40,8 @@ app.use((req, res, next) => {
 });
 app.use(express.static(join(__dirname, "public")));
 
-app.use(apiContent);
 app.use("/api", apiRouter);
+app.use(apiContent);
 
 app.use((req, res) => {
   res.status(404);

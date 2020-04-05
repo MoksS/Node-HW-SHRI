@@ -56,7 +56,7 @@ function Settings () {
 
       const result = await response.json();
 
-      if(response.status === 400) {
+      if(response.status >= 400) {
         setError(result.data);
         bt1.removeAttribute("disabled");
         bt2.removeAttribute("disabled");
