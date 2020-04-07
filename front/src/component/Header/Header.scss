@@ -1,0 +1,52 @@
+.Header {
+  width: 100%;
+  background: #FFFFFF;
+  padding: var(--space-xxs) 0px;
+
+  &_Content {
+    margin: auto;
+    max-width: var(--max-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &_Banner {
+    display: flex;
+    align-items: center;
+    flex-basis: 70%;
+    margin: 0;
+    font-weight: 500;
+    font-size: var(--font-size-xxxxl);
+    line-height: var(--line-height-xxl);
+    letter-spacing: 0.25px;
+
+    &__lineHeight {
+      &-l {
+        line-height: var(--line-height-xxxl);
+      }
+    }
+
+    &__color {
+      &-default {
+        color: var(--grey-1000);
+      }
+
+      &-black {
+        color: var(--black);
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 824px) {
+  .Header {
+    padding: var(--space-xs) var(--space-m);
+ 
+    &_Banner {
+     font-size: var(--font-size-xxxl);
+     line-height: var(--line-height-xl);
+    }
+  }
+}

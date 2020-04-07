@@ -1,0 +1,40 @@
+.Date {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__marginLeftTop-on {
+    margin-top: var(--space-xxxs);
+    margin-left: 31px;
+  }
+
+  &__row-on {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  &__DinamicColor-on {
+      color: var(--black);
+  }
+
+  &_Day {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &_Hour {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 824px) {
+  .Date {
+    margin-top: var(--space-xxxs);
+    margin-left: 36px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}

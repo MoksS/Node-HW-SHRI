@@ -1,0 +1,161 @@
+.Card {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 1px 1px #4344454d, 0px 0px 1px #4344454d;
+  border-radius: 6px;
+  padding: var(--space-xs) var(--space-xxxl);
+  justify-content: space-between;
+
+  &__flexBasic {
+    &-80{
+      flex-basis: 80%;
+    }
+  }
+
+  &__indentBottom { 
+    &-xs {
+      margin-bottom: 4px;
+    }
+
+    &-s {
+      margin-bottom: var(--space-xxxs);
+    }
+
+    &-l {
+      margin-bottom: var(--space-xxs);
+    }
+  }
+
+  &_Info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
+
+  &_Build {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__indentBottom { 
+      &-xs {
+        margin-bottom: 4px;
+      }
+
+      &-s {
+        margin-bottom: var(--space-xxxs);
+      }
+
+      &-l {
+        margin-bottom: var(--space-xxs);
+      }
+    }
+  }
+
+  &__column-on {
+    flex-direction: column;
+  }
+
+  &__column-on .Date__DinamicColor-on {
+    color: var(--black);
+  }
+
+  &__column-on .Card_Commit{
+    border-bottom: 1px solid var(--grey-50);
+    padding-bottom: var(--space-xxxs);
+  }
+
+  &_Commit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__indentLeft {
+      &-xxl {
+        margin-left: var(--space-xxxxxl);
+      }
+    }
+
+    &__border-bottom {
+      border-bottom: 1px solid var(--grey-50);
+      padding-bottom: var(--space-xxxs);
+    }
+  }
+
+  &_Branch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__indentRigth { 
+      &-xs {
+        margin-right: 4px;
+      }
+
+      &-l {
+        margin-right: var(--space-xxs);
+      }
+    }
+  }
+
+  &_User {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &_Status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+}
+
+.Card:hover {
+  box-shadow: 0px 2px 8px #4344454d, 0px 0px 1px #4344454d;
+  cursor: var(--pointer), auto;
+}
+
+@media only screen and (max-width: 824px) {
+  .Card {
+    flex-direction: column;
+
+    &_Date {
+      margin-top: var(--space-xxxs);
+      margin-left: 36px;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      &__DinamicColor-on {
+        color: var(--grey-1100);
+      }
+    }
+
+    &_Build {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &_Commit {
+      padding-bottom: 0px;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 36px;
+      border-bottom: 1px solid var(--grey-50);
+    }
+
+    &_Branch {
+      margin-bottom: var(--space-xxxs);
+    }
+
+    &_User {
+      margin-bottom: var(--space-xxxs);
+    }
+
+    &__column-on .Date__DinamicColor-on {
+      color: var(--grey-1100);
+    }
+  }
+}

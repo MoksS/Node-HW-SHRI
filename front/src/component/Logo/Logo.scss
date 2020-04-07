@@ -1,0 +1,27 @@
+.Logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+  width: 264px;
+  height: 248px;
+
+  &_Img {
+    width: 124px;
+    height: 124px;
+  }
+
+  &_Text {
+    margin: var(--space-xxs) 26px 0px 26px; // костыли для pixel perfect
+    font-family: "YS Text";
+    font-style: normal;
+    font-weight: 400;
+    font-size:  var(--font-size-l);
+    line-height: 125%;
+    /* or 16px */
+    text-align: center;
+
+    color: var(--black);
+  }
+}

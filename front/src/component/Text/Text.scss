@@ -1,0 +1,103 @@
+.Text {
+  font-family: "YS Text";
+  font-style: normal;
+
+  &__size {
+    &-m {
+      font-size:  var(--font-size-l);
+    }
+
+    &-s {
+      font-size: var(--font-size-xl);
+    }
+
+    &-l {
+      font-size: var(--font-size-xxxl);
+    }
+  }
+
+  &__weight {
+    &-small {
+      font-weight: 400;
+    }
+
+    &-normal {
+      font-weight: 500;
+    }
+  }
+
+  &__lineHeight {
+    &-xxxxl {
+      line-height: var(--line-height-xxxxl);
+    }
+    &-xxl {
+      line-height: var(--line-height-xxl);
+    }
+
+    &-xl {
+      line-height: var(--line-height-l);
+    }
+
+    &-l {
+      line-height: var(--line-height-s);
+    }
+  }
+
+  &__color {
+    &-default {
+      color: var(--black);
+    }
+
+    &-secondary {
+      color: var(--grey-1100);
+    }
+
+    &-green {
+      color: var(--green-500);
+    }
+    
+    &-hash {
+      color:var(--grey-1100);
+    }
+
+    &-red {
+      color: var(--red-500);
+    }
+
+    &-orange {
+      color: var(--orange-500);
+    }
+  }
+
+  &__indentLeft { 
+    &-xs {
+      margin-left: 4px;
+    }
+  }
+
+  &__indentRigth { 
+    &-xs {
+      margin-right: 4px;
+    }
+
+    &-m {
+      margin-right: var(--space-xxs);
+    }
+  }
+
+  &__hide-on{
+    display: block;
+  }
+}
+
+
+
+@media only screen and (max-width: 824px) {
+  .Text__hide-on{
+    display: none;
+  }
+
+  .Text__indentLeft-xs {
+    margin-left: 36px; 
+  }
+}

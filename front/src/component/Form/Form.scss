@@ -1,0 +1,32 @@
+.Form {
+
+  width: 474px;
+
+  &_H2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-l);
+    margin: var(--space-xxxs) 0px;
+    color: var(--black);
+  }
+
+  &_Description {
+    font-weight: 400;
+    font-size: var(--font-size-l);
+    line-height: var(--line-height-m);
+    letter-spacing: 0.06px;
+    color: var(--grey-1000);
+    margin: 0px 0px var(--space-xxl) 0px;
+  }
+}
+
+@media only screen and (max-width: 824px) {
+  .Form {
+    width: 100%;
+
+    &_Description {
+      margin-bottom: 14px;
+    }
+  }
+}

@@ -1,0 +1,140 @@
+.ButtonsField {
+  display: flex;
+  flex-direction: row;
+
+  &__indent {
+    &-topXl {
+      margin-top: 25px;
+    }
+  }
+
+  &__column-off {
+    flex-direction: row;
+  }
+}
+
+.Button {
+  padding: 0;
+  justify-content: center;
+  display: flex;
+  border-radius: var(--border-radius);
+  border: none;
+  outline: none;
+  cursor: var(--pointer), auto;
+  
+
+  &__indentRigth {
+    &-s {
+      margin-right: var(--space-xxxs);
+    }
+  }
+
+  &__indentLeft {
+    &-s {
+      margin-left: var(--space-xxxs);
+    }
+  }
+
+  &__indentBottom {
+    &-s {
+      margin-bottom: var(--space-xs);
+    }
+
+    &-xl {
+      margin-bottom: var(--space-xl);
+    }
+  }
+
+  &__color {
+    &-control {
+      background-color: var(--grey-100);
+
+      &:hover {
+        background-color: var(--grey-200);
+      }
+
+      &:active {
+        box-shadow:inset 0px 0px 0px 2px var(--grey-300)
+      }
+
+      &:disabled {
+        background-color: var(--grey-10);
+      }
+    }
+    &-action {
+      background-color: var(--orange-100);
+      &:hover {
+        background-color: var(--orange-200);
+      }
+
+      &:active {
+        box-shadow:inset 0px 0px 0px 2px var(--orange-300);
+      }
+
+      &:disabled {
+        background-color: var(--grey-10);
+      }
+    }
+
+    &-close {
+      background-color: #FFFFFF;
+    }
+  }
+
+  &__padding {
+
+    &-control {
+      padding: 0 var(--space-s) 0 0;
+    }
+
+    &-action {
+      padding: 0px var(--space-xl);
+    }
+  }
+
+  &__height {
+    &-default {
+      height: 28px;
+    }
+
+    &-action {
+      height: 36px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@media only screen and (max-width: 824px) {
+  .ButtonsField {
+    flex-direction: column;
+
+    &__column-off {
+      flex-direction: row;
+    }
+  }
+
+
+  .Button {
+    padding: 0px;
+
+    &__padding {
+
+      &-action {
+        padding: 0px var(--space-xl);
+      }
+    }
+
+
+    &__indentRigth {
+      &-s {
+        margin-right: 0px;
+      }
+    }
+
+    &__padding {
+      &-control {
+        padding: 0px;
+      }
+    }
+  }
+}
