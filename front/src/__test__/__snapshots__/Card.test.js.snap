@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Card correctly 1`] = `
+<div
+  className="Card Card__indentBottom-s"
+>
+  <div
+    className="Card_Info Card__flexBasic-80"
+  >
+    <div
+      className="Card_Build Card_Build__indentBottom-s"
+    >
+      <div
+        className="Card_Status"
+      >
+        <span
+          className="Icon Icon__indentRigth-s Icon__size-default Icon__img-Success"
+        />
+        <span
+          className="Text Text__size-l Text__weight-normal Text__lineHeight-xl Text__color-green"
+        >
+          #
+          12
+        </span>
+      </div>
+      <span
+        className="Text Text__indentLeft-xs Text__size-s Text__weight-small Text__lineHeight-xl Text__color-default"
+      >
+        КОммит Коммит АГАСЬ
+      </span>
+    </div>
+    <div
+      className="Card_Commit Card_Commit__indentLeft-xxl"
+    >
+      <div
+        className="Card_Branch Card_Branch__indentRigth-l "
+      >
+        <span
+          className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-code"
+        />
+        <span
+          className="Text Text__indentRigth-xs Text__size-m Text__weight-small Text__lineHeight-l Text__color-default"
+        >
+          master
+        </span>
+        <span
+          className="Text Text__indentRigth-xs Text__size-m Text__weight-small Text__lineHeight-l Text__color-hash"
+        >
+          asd213sf213a1as2
+        </span>
+      </div>
+      <div
+        className="Card_User"
+      >
+        <span
+          className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-user"
+        />
+        <span
+          className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-default"
+        >
+          MoksS
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Date"
+  >
+    <div
+      className="Date_Day"
+    >
+      <span
+        className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-calendar"
+      />
+      <span
+        className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Text__indentRigth-m Date__DinamicColor-on"
+      >
+        9 дек, 12:45
+      </span>
+    </div>
+    <div
+      className="Date_Hour"
+    >
+      <span
+        className="Icon Icon__indentRigth-xs Icon__size-xs Icon__img-clock"
+      />
+      <span
+        className="Text Text__size-m Text__weight-small Text__lineHeight-l Text__color-secondary Date__DinamicColor-on"
+      >
+        2 мин 3сек
+      </span>
+    </div>
+  </div>
+</div>
+`;

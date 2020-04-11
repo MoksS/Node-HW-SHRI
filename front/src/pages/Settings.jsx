@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 function Settings () {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  
   const [error, setError] = useState("");
   const formEl = useRef(null);
   useEffect(() => {

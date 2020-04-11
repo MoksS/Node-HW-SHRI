@@ -4,7 +4,7 @@
   "description": "node js server for ci",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js",
+    "dev": "nodemon index.js",
     "product": "NODE_ENV=production node index.js"
   },
   "nodemonConfig": {

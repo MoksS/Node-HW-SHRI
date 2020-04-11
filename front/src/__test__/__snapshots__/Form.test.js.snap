@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Form correctly 1`] = `
+<form
+  className="Form"
+  method="post"
+  name="settings"
+  onClick={[Function]}
+  onSubmit={[Function]}
+>
+  <h2
+    className="Form_H2"
+  >
+    Settings
+  </h2>
+  <p
+    className="Form_Description"
+  >
+    Configure repository connection and synchronization settings.
+  </p>
+  <div
+    className="Input"
+  >
+    <p
+      className="Input_Head"
+    >
+      GitHub repository
+      <span
+        className="Input_Bind"
+      >
+         *
+      </span>
+    </p>
+    <div
+      className="Input_Field"
+    >
+      <input
+        className="Input_Input"
+        name="repoName"
+        placeholder="user-name/repo-name"
+        type="text"
+      />
+      <button
+        className="Button Button__color-close"
+        onClick={[Function]}
+      >
+        <span
+          className="Icon Icon__size-xs Icon__img-close"
+        />
+      </button>
+    </div>
+    
+  </div>
+  <div
+    className="Input"
+  >
+    <p
+      className="Input_Head"
+    >
+      Build command
+      <span
+        className="Input_Bind"
+      >
+         *
+      </span>
+    </p>
+    <div
+      className="Input_Field"
+    >
+      <input
+        className="Input_Input"
+        name="buildCommand"
+        placeholder="npm ci && npm run build"
+        type="text"
+      />
+      <button
+        className="Button Button__color-close"
+        onClick={[Function]}
+      >
+        <span
+          className="Icon Icon__size-xs Icon__img-close"
+        />
+      </button>
+    </div>
+    
+  </div>
+  <div
+    className="Input"
+  >
+    <p
+      className="Input_Head"
+    >
+      Main branch
+      
+    </p>
+    <div
+      className="Input_Field"
+    >
+      <input
+        className="Input_Input"
+        name="mainBranch"
+        placeholder="master"
+        type="text"
+      />
+      <button
+        className="Button Button__color-close"
+        onClick={[Function]}
+      >
+        <span
+          className="Icon Icon__size-xs Icon__img-close"
+        />
+      </button>
+    </div>
+    
+  </div>
+  <div
+    className="Input Input__flex-active"
+  >
+    <p
+      className="Input_Head Input_Head__indent-none Input_Head__indent-rigth"
+    >
+      Synchronize every
+    </p>
+    <div
+      className="Input_Field  Input_Field__sizeWidth-small Input_Field__position-rigth"
+    >
+      <input
+        className="Input_Input Input_Input__sizeWidth-small"
+        defaultValue={123}
+        mask={
+          Array [
+            /\\\\d/,
+            /\\\\d/,
+          ]
+        }
+        name="period"
+        placeholder="10"
+        placeholderChar=" "
+        type="text"
+      />
+    </div>
+    <span
+      className="Input_Span"
+    >
+      minutes
+    </span>
+  </div>
+  <span
+    className="Text Text__size-l Text__weight-normal Text__lineHeight-xxl Text__color-red"
+  >
+    
+  </span>
+  <div
+    className="ButtonsField ButtonsField__indent-topXl"
+  >
+    <button
+      className="Button Button__indentRigth-s Button__indentBottom-s Button__height-action Button__color-action Button__padding-action"
+    >
+      <span
+        className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default"
+      >
+        Save
+      </span>
+    </button>
+    <button
+      className="Button Button__color-control Button__padding-action Button__height-action Button__indentBottom-xl"
+    >
+      <span
+        className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default"
+      >
+        Cancel
+      </span>
+    </button>
+  </div>
+</form>
+`;

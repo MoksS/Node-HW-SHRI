@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders Header in Build correctly 1`] = `
+<header
+  className="Header"
+>
+  <div
+    className="Header_Content"
+  >
+    <h1
+      className="Header_Banner Header_Banner__color-black Header_Banner__lineHeight-l"
+    >
+      MoksS/JESTTEST
+    </h1>
+    <div
+      className="ButtonsField ButtonsField__column-off"
+    >
+      <button
+        className="Button Button__color-control Button__padding-control Button__height-default"
+      >
+        <span
+          className="Icon Icon__size-xl Icon__img-play"
+        />
+        <span
+          className="Text Text__size-m Text__lineHeight-xxl Text__weight-small Text__color-default Text__hide-on"
+        >
+          Run build
+        </span>
+      </button>
+      <a
+        href="/settings"
+      >
+        <button
+          className="Button Button__color-control Button__indentLeft-s Button__height-default"
+        >
+          <span
+            className="Icon Icon__size-xl Icon__img-control"
+          />
+        </button>
+      </a>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header renders Header in Settings correctly 1`] = `
+<header
+  className="Header"
+>
+  <div
+    className="Header_Content"
+  >
+    <h1
+      className="Header_Banner Header_Banner__color-default"
+    >
+      School CI server
+    </h1>
+  </div>
+</header>
+`;
+
+exports[`Header renders Header in Start Screen correctly 1`] = `
+<header
+  className="Header"
+>
+  <div
+    className="Header_Content"
+  >
+    <h1
+      className="Header_Banner Header_Banner__color-default"
+    >
+      School CI server
+    </h1>
+    <a
+      href="/settings"
+    >
+      <button
+        className="Button Button__color-control Button__padding-control Button__height-default"
+      >
+        <span
+          className="Icon Icon__size-xl Icon__img-control"
+        />
+        <span
+          className="Text Text__size-m Text__lineHeight-xxl Text__weight-small Text__color-default Text__hide-on"
+        >
+          Settings
+        </span>
+      </button>
+    </a>
+  </div>
+</header>
+`;

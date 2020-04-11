@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Logo correctly 1`] = `
+<div
+  className="Logo"
+>
+  <img
+    alt="LOGO"
+    className="Logo_Img"
+    src="/icon/logo.svg"
+  />
+  <p
+    className="Logo_Text"
+  >
+    Configure repository connection and synchronization settings
+  </p>
+  <a
+    href="/settings"
+  >
+    <button
+      className="Button Button__color-action Button__padding-action"
+    >
+      <span
+        className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default"
+      >
+        Open settings
+      </span>
+    </button>
+  </a>
+</div>
+`;
