@@ -5,13 +5,15 @@ const getStartPage = (req, res) => {
     return res.redirect("/build");
   }
 
+  console.log("ok");
+
   const preloadState = {
     setting: "/"
   };
 
   const html = pageTemp(preloadState);
 
-  return res.send(html);
+  return res.status(200).send(html);
 };
 
 const getBuildPage = (req, res) => {

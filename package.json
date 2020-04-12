@@ -2,11 +2,11 @@
   "name": "tes",
   "version": "1.0.0",
   "description": "node js server for ci",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "product": "NODE_ENV=production node index.js",
-    "test": "jest --rootDir __test__ --watch" 
+    "dev": "nodemon server.js",
+    "product": "NODE_ENV=production node server.js",
+    "test": "jest --rootDir __test__ --runInBand --detectOpenHandles --watch"
   },
   "nodemonConfig": {
     "ignore": [
@@ -18,6 +18,12 @@
     "type": "git",
     "url": "git+https://github.com/MoksS/Node-HW-SHRI.git"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "author": "MoksS",
   "license": "MIT",
   "bugs": {
@@ -26,6 +32,8 @@
   "homepage": "https://github.com/MoksS/Node-HW-SHRI#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
@@ -39,6 +47,8 @@
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "react-router-dom": "^5.1.2",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "superagent": "^5.2.2",
+    "supertest": "^4.0.2"
   }
 }

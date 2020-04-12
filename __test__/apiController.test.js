@@ -1,5 +1,9 @@
 const controller = require("../controllers/apiController");
 
+// const request = require("supertest");
+// пробовал я supertest с экспрессом, проверять потом статус коды, но у меня к сожалению втечении несколиких часов
+// так и не удалось все завести, ибо тупой
+
 jest.mock("../handlers/axios", () => {
   return {
     inst: {
@@ -56,7 +60,7 @@ jest.mock("../handlers/axios", () => {
                   duration: 0
                 }
               }
-            })
+            });
           default:
             break;
         }
