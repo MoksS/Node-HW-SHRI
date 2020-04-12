@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "product": "NODE_ENV=production node index.js"
+    "product": "NODE_ENV=production node index.js",
+    "test": "jest --rootDir __test__ --watch" 
   },
   "nodemonConfig": {
     "ignore": [
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "express": "^4.17.1",
+    "jest": "^25.3.0",
     "nodegit": "^0.26.5",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
