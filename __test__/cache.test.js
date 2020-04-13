@@ -20,7 +20,6 @@ describe("test cache handler", () => {
       { encoding: "utf8" }
     );
 
-    console.log(check);
     expect(JSON.parse(check)).toEqual({ data: `Здесь был тест ${date}` });
   });
 
