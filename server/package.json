@@ -1,0 +1,56 @@
+{
+  "name": "tes",
+  "version": "1.0.0",
+  "description": "node js server for ci",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "product": "NODE_ENV=production node server.js",
+    "test": "jest --rootDir __test__ --runInBand --detectOpenHandles --watch"
+  },
+  "nodemonConfig": {
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "ignore": [
+      "builds/*",
+      "cache/*.json"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoksS/Node-HW-SHRI.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "author": "MoksS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MoksS/Node-HW-SHRI/issues"
+  },
+  "homepage": "https://github.com/MoksS/Node-HW-SHRI#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "compression": "^1.7.4",
+    "concurrently": "^5.1.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "express": "^4.17.1",
+    "nodegit": "^0.26.5",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
