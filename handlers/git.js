@@ -6,10 +6,7 @@ const { inst } = require("./axios");
 
 async function removeRep() {
   try {
-    if (process.conf.repName !== undefined) {
-      const name = process.conf.repName.replace("/", "-");
-      await exec(`rm -rf ./builds/${name}`); // я надеюсь мак или винда могут в эти команды((
-    }
+    await exec(`rm -rf ./builds/*`); // я надеюсь мак или винда могут в эти команды((
     return "ok";
   } catch (e) {
     return e;
