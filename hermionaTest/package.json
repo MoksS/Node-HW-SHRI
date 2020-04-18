@@ -1,0 +1,40 @@
+{
+  "name": "tes",
+  "version": "1.0.0",
+  "description": "node js server for ci",
+  "scripts": {
+    "startSelenium": "selenium-standalone start",
+    "test": "node_modules/.bin/hermione",
+    "updateImgTest": "node_modules/.bin/hermione --update-refs"
+  },
+  "nodemonConfig": {
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "ignore": [
+      "builds/*",
+      "cache/*.json"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoksS/Node-HW-SHRI.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "author": "MoksS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MoksS/Node-HW-SHRI/issues"
+  },
+  "homepage": "https://github.com/MoksS/Node-HW-SHRI#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "hermione": "^3.1.0",
+    "html-reporter": "^5.15.2"
+  }
+}
