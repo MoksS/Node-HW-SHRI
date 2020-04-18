@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 function Settings () {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  
   const [error, setError] = useState("");
   const formEl = useRef(null);
   useEffect(() => {
@@ -73,7 +73,7 @@ function Settings () {
         type: "setName", 
         name: jsonObject["repoName"]
       })
-      history.push("/build");
+      return history.push("/build");
 
     } catch (error) {
       // если упал сервер или пропал интернет - пишешм что то, но не сегодня)

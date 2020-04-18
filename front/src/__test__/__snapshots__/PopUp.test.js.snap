@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PopUp correctly 1`] = `
+<div
+  className="PopUp"
+>
+  <form
+    className="Form"
+    method="post"
+    name="newBuild"
+    onClick={[Function]}
+    onSubmit={[Function]}
+  >
+    <h2
+      className="Form_H2"
+    >
+      New Build
+    </h2>
+    <p
+      className="Form_Description"
+    >
+      Enter the commit hash which you want to build.
+    </p>
+    <div
+      className="Input"
+    >
+      <p
+        className="Input_Head"
+      >
+        
+        
+      </p>
+      <div
+        className="Input_Field"
+      >
+        <input
+          className="Input_Input"
+          name="commitHash"
+          placeholder="Commit Hash"
+          type="text"
+        />
+        <button
+          className="Button Button__color-close"
+          onClick={[Function]}
+        >
+          <span
+            className="Icon Icon__size-xs Icon__img-close"
+          />
+        </button>
+      </div>
+      
+    </div>
+    <div
+      className="ButtonsField"
+    >
+      <button
+        className="Button Button__indentRigth-s Button__indentBottom-s Button__height-action Button__color-action Button__padding-action"
+        onClick={[Function]}
+      >
+        <span
+          className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default"
+        >
+          Run build
+        </span>
+      </button>
+      <button
+        className="Button Button__color-close Button__padding-action Button__height-action Button__indentBottom-xl"
+        onClick={[MockFunction]}
+      >
+        <span
+          className="Text Text__size-m Text__lineHeight-xxxxl Text__weight-small Text__color-default"
+        >
+          Cancel
+        </span>
+      </button>
+    </div>
+    <span
+      className="Text Text__size-l Text__weight-normal Text__lineHeight-xxl Text__color-red"
+    >
+      
+    </span>
+  </form>
+</div>
+`;

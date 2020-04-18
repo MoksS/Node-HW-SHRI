@@ -11,8 +11,22 @@ const getStartPage = (req, res) => {
 
   const html = pageTemp(preloadState);
 
-  return res.send(html);
+  return res.status(200).send(html);
 };
+
+const getSettings = (req, res) => {
+  const preloadState = {
+    setting: "/"
+  };
+
+  if (process.conf.period !== undefined) {
+    preloadState.setting = "/build";
+  }
+
+  const html = pageTemp(preloadState);
+
+  return res.status(200).send(html);
+}
 
 const getBuildPage = (req, res) => {
   if (process.conf.period === undefined) {
@@ -33,8 +47,20 @@ const checkSettings = (req, res) => {
   return res.json(process.conf);
 };
 
+const testStartPage = (req, res) => {
+  const preloadState = {
+    setting: "/"
+  };
+
+  const html = pageTemp(preloadState);
+
+  return res.status(200).send(html);
+};
+
 module.exports = {
+  getSettings,
   getStartPage,
   checkSettings,
-  getBuildPage
+  getBuildPage,
+  testStartPage
 };

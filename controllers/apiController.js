@@ -32,7 +32,7 @@ module.exports.getBuilds = async (req, res) => {
       `/build/list?offset=${offset}&limit=${limit}`
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       data: buildList.data.data
     });
   } catch (error) {
@@ -60,8 +60,10 @@ module.exports.getBuildId = async (req, res) => {
 // 880405db-106a-48c0-9a77-0103e11f9fc7
 module.exports.getLogs = async (req, res) => {
   try {
-    const readStream = await cache.get(req.params.buildId, res);
-    if (readStream) return;
+    if (res.set !== undefined) {
+      const readStream = await cache.get(req.params.buildId, res);
+      if (readStream) return;
+    }
 
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
     if (log.data.length < 1) {

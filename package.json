@@ -2,10 +2,13 @@
   "name": "tes",
   "version": "1.0.0",
   "description": "node js server for ci",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "nodemon index.js",
-    "product": "NODE_ENV=production node index.js"
+    "dev": "nodemon server.js",
+    "product": "NODE_ENV=production node server.js",
+    "unittest": "jest --rootDir __test__ --runInBand --detectOpenHandles --watch",
+    "test": "node_modules/.bin/hermione",
+    "updateImgTest": "node_modules/.bin/hermione --update-refs"
   },
   "nodemonConfig": {
     "ignore": [
@@ -17,6 +20,12 @@
     "type": "git",
     "url": "git+https://github.com/MoksS/Node-HW-SHRI.git"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "author": "MoksS",
   "license": "MIT",
   "bugs": {
@@ -25,6 +34,9 @@
   "homepage": "https://github.com/MoksS/Node-HW-SHRI#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
@@ -33,10 +45,17 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "express": "^4.17.1",
+    "hermione": "^3.1.0",
     "nodegit": "^0.26.5",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "react-router-dom": "^5.1.2",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "superagent": "^5.2.2",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "html-reporter": "^5.15.2",
+    "jest": "^24.9.0"
   }
 }
