@@ -11,7 +11,7 @@ import Preloader from "../component/Preloader";
 import { useSelector, useDispatch } from "react-redux";
 import { getBuildDetails, onRebuild } from "../middleware/ajaxRequest";
 
-const convert = new Convert({ fg: '#000', bg: '#000' });
+const convert = new Convert({ newline: true });
 
 function BuildDetails() {
   const history = useHistory();

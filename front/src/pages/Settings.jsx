@@ -8,11 +8,13 @@ import Input from "../component/Input";
 import Text from "../component/Text";
 import { host } from "../helpers/constant";
 import { useDispatch } from "react-redux";
+import {useSelector} from "react-redux";
 
 function Settings () {
   const history = useHistory();
   const dispatch = useDispatch();
-  
+  const state = useSelector(state => state.setting);
+
   const [error, setError] = useState("");
   const formEl = useRef(null);
   useEffect(() => {
@@ -20,7 +22,7 @@ function Settings () {
   }, []);
 
   const Back = () => {
-    history.goBack();
+    history.push(state);
   }
 
   const onSaveClick = async (e) => {
