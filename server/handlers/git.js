@@ -15,7 +15,7 @@ async function removeRep() {
 
 const clone = async name => {
   try {
-    if (process.conf.repName !== name) {
+    if (process.conf.repoName !== name) {
       await removeRep();
     } else {
       return "ok";
@@ -28,7 +28,7 @@ const clone = async name => {
     );
 
     await git.Clone(`${process.conf.gitUrl}${name}`, repPath);
-    process.conf.repName = name.replace("/", "-");
+    process.conf.repoName = name.replace("/", "-");
 
     return "ok";
   } catch (error) {
@@ -45,7 +45,7 @@ const clone = async name => {
 };
 
 const lastCommit = async () => {
-  const name = process.conf.repName;
+  const name = process.conf.repoName;
   const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
 
   const repo = await git.Repository.open(path.resolve(repPath, ".git"));
@@ -61,7 +61,8 @@ const lastCommit = async () => {
 
 const checkLog = async () => {
   const newCommit = [];
-  const name = process.conf.repName;
+  const name = process.conf.repoName;
+
   const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
 
   const repo = await git.Repository.open(path.resolve(repPath, ".git"));

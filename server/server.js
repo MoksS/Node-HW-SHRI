@@ -11,10 +11,11 @@ const getRep = async () => {
     console.log(process.conf);
     if (process.conf.period === undefined) return;
     if (process.conf.period > 0) {
-      clearInterval(process.checkCommit);
+      const lastCommit = await git.lastCommit();
+      process.conf.lastCommitHash = lastCommit.commitHash;
       process.checkCommit = setInterval(
         git.checkCommit,
-        process.conf.period * 60000 // здесь устанавливается время для авто проверки новых коммитов
+        process.conf.period * 4000 // здесь устанавливается время для авто проверки новых коммитов
         // сейчас стоит раз в минуту (если period 1)
       );
     }
