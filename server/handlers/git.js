@@ -103,7 +103,11 @@ const checkCommit = async () => {
       commits = commits.reverse();
 
       for await (const commit of commits) {
-        await inst.post("/build/request", commit);
+        try {
+          await inst.post("/build/request", commit); 
+        } catch (error) {
+          setTimeout(() => inst.post("/build/request", commit), 2000);
+        }
       }
     }
   } catch (error) {
