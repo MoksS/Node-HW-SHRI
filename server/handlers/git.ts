@@ -1,22 +1,16 @@
-const git = require("nodegit");
-const path = require("path");
-const util = require("util");
-const exec = util.promisify(require("child_process").exec);
-const { inst } = require("./axios");
+import git, { Clone } from "nodegit";
+import path from "path";
+import util from "util";
+import { exec } from "child_process";
+import inst from "./axios-inst";
+import process from "../typings/declareVar";
 
-async function removeRep() {
-  try {
-    await exec(`rm -rf ./builds/*`); // я надеюсь мак или винда могут в эти команды((
-    return "ok";
-  } catch (e) {
-    return e;
-  }
-}
+const execAsync = util.promisify(exec);
 
-const clone = async name => {
+const clone = async (name: string): Promise<string> => {
   try {
     if (process.conf.repoName !== name) {
-      await removeRep();
+      await execAsync(`rm -rf ./builds/*`);
     } else {
       return "ok";
     }
@@ -27,7 +21,7 @@ const clone = async name => {
       name.replace("/", "-")
     );
 
-    await git.Clone(`${process.conf.gitUrl}${name}`, repPath);
+    await Clone.clone(`${process.conf.gitUrl}${name}`, repPath);
     process.conf.repoName = name.replace("/", "-");
 
     return "ok";
@@ -44,7 +38,14 @@ const clone = async name => {
   }
 };
 
-const lastCommit = async () => {
+interface Commit {
+  commitMessage: string;
+  commitHash: string;
+  branchName: string;
+  authorName: string;
+}
+
+const lastCommit = async (): Promise<Commit> => {
   const name = process.conf.repoName;
   const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
 
@@ -59,8 +60,8 @@ const lastCommit = async () => {
   };
 };
 
-const checkLog = async () => {
-  const newCommit = [];
+const checkLog = async (): Promise<Array<Commit>> => {
+  const newCommit: Array<Commit> = [];
   const name = process.conf.repoName;
 
   const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
@@ -76,7 +77,7 @@ const checkLog = async () => {
   const lastCommitHash = process.conf.lastCommitHash;
 
   return new Promise(res => {
-    const history = firstCommit.history(git.Revwalk.SORT.TIME);
+    const history = firstCommit.history();
     history.start();
 
     history.on("commit", commit => {
@@ -95,7 +96,7 @@ const checkLog = async () => {
   });
 };
 
-const checkCommit = async () => {
+const checkCommit = async (): Promise<void> => {
   try {
     let commits = await checkLog();
     if (commits.length > 0) {
@@ -104,7 +105,7 @@ const checkCommit = async () => {
 
       for await (const commit of commits) {
         try {
-          await inst.post("/build/request", commit); 
+          await inst.post("/build/request", commit);
         } catch (error) {
           setTimeout(() => inst.post("/build/request", commit), 2000);
         }
@@ -162,7 +163,7 @@ const lookup = async hash => {
   }
 };
 
-module.exports = {
+export default {
   clone,
   lastCommit,
   checkCommit,
