@@ -116,7 +116,7 @@ const checkCommit = async (): Promise<void> => {
   }
 };
 
-const lookup = async hash => {
+const lookup = async (hash: string): Promise<Commit> => {
   try {
     const name = process.conf.repoName;
     const repPath = path.resolve(
@@ -136,12 +136,12 @@ const lookup = async hash => {
     const lastCommitHash = hash;
     let i = 20;
     return new Promise((res, rej) => {
-      const history = firstCommit.history(git.Revwalk.SORT.TIME);
+      const history = firstCommit.history();
       history.start();
 
       history.on("commit", commit => {
         if (i < 0) {
-          rej(new Error({ message: "Нету такого коммита" }));
+          rej(new Error("Нету такого коммита" ));
         }
 
         i--;
