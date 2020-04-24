@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
+import compression from "compression";
+import { join } from "path";
+import apiRouter from "./router/apiRouter";
+import apiContent from "./router/content";
 
 const app = express();
-const compression = require("compression");
-const { join } = require("path");
-const apiRouter = require("./router/apiRouter");
-const apiContent = require("./router/content");
 
 app.use(compression());
 app.use((req, res, next) => {
@@ -33,4 +33,4 @@ app.use((req, res) => {
   res.type("text").send("Not found");
 });
 
-module.exports = app;
+export default app;

@@ -1,6 +1,7 @@
-const { inst } = require("../handlers/axios");
-const { Cache } = require("../handlers/cache");
-const git = require("../handlers/git");
+import { Request, Response } from "express";
+import inst from "../utils/axios-inst";
+import Cache from "../utils/cache";
+import git from "../utils/git";
 
 const cache = new Cache({
   dir: "../cache",
@@ -9,7 +10,10 @@ const cache = new Cache({
 
 cache.clearCache();
 
-module.exports.getSetting = async (req, res) => {
+export const getSetting = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const result = await inst.get("/conf");
 
@@ -23,7 +27,10 @@ module.exports.getSetting = async (req, res) => {
   }
 };
 
-module.exports.getBuilds = async (req, res) => {
+export const getBuilds = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { query } = req;
   const offset = query.offset || 0;
   const limit = query.limit || 25;
@@ -42,7 +49,10 @@ module.exports.getBuilds = async (req, res) => {
   }
 };
 
-module.exports.getBuildId = async (req, res) => {
+export const getBuildId = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const infoBuild = await inst.get(
       `/build/details?buildId=${req.params.buildId}`
@@ -58,11 +68,14 @@ module.exports.getBuildId = async (req, res) => {
 };
 
 // 880405db-106a-48c0-9a77-0103e11f9fc7
-module.exports.getLogs = async (req, res) => {
+export const getLogs = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     if (res.set !== undefined) {
       const readStream = await cache.get(req.params.buildId, res);
-      if (readStream) return;
+      if (readStream) return res;
     }
 
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
@@ -82,7 +95,7 @@ module.exports.getLogs = async (req, res) => {
     });
   }
 };
-module.exports.postSetting = async (req, res) => {
+export const postSetting = async (req, res) => {
   const { body } = req;
 
   try {
@@ -132,7 +145,7 @@ module.exports.postSetting = async (req, res) => {
   }
 };
 
-module.exports.postCommitHash = async (req, res) => {
+export const postCommitHash = async (req, res) => {
   try {
     if (req.body.commitMessage === undefined) {
       const commit = await git.lookup(req.params.commitHash);

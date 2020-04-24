@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
+
+import content from "../controllers/contentController";
 
 const router = express.Router();
-
-const content = require("../controllers/contentController");
 
 router.get("/", content.getStartPage);
 router.get("/settings", content.getSettings);
@@ -12,4 +12,4 @@ router.get("/checkSettings", content.checkSettings);
 router.get("/teststartpageqwert123", content.testStartPage);
 router.get("*", content.getStartPage);
 
-module.exports = router;
+export default router;

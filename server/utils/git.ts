@@ -141,7 +141,7 @@ const lookup = async (hash: string): Promise<Commit> => {
 
       history.on("commit", commit => {
         if (i < 0) {
-          rej(new Error("Нету такого коммита" ));
+          rej(new Error("Нету такого коммита"));
         }
 
         i--;

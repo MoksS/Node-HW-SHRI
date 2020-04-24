@@ -7,6 +7,7 @@ declare const process: {
     mainBranch: string;
   };
   checkCommit: NodeJS.Timeout;
+  exit(num: number): void;
 };
 
 export default process;

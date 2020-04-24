@@ -57,7 +57,7 @@ const testStartPage = (req, res) => {
   return res.status(200).send(html);
 };
 
-module.exports = {
+export default {
   getSettings,
   getStartPage,
   checkSettings,

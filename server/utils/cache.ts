@@ -1,10 +1,20 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import { Response } from "express";
+
+interface CacheInterface {
+  dir: string;
+  timestamp?: number;
+}
 
 class Cache {
-  constructor({ dir, timestamp }) {
-    this.timestamp = timestamp || 3600000; // неделя в миллисекундах
-    this.dir = path.resolve(__dirname, dir);
+  dir: string;
+
+  timestamp: number;
+
+  constructor(obj: CacheInterface) {
+    this.timestamp = obj.timestamp || 3600000; // неделя в миллисекундах
+    this.dir = path.resolve(__dirname, obj.dir);
 
     try {
       fs.mkdirSync(this.dir); // это операция выполняеться один раз в момент инцилизации файла apiController,
@@ -15,7 +25,7 @@ class Cache {
     }
   }
 
-  get(id, stream) {
+  get(id: string, stream: Response): Promise<boolean> {
     return new Promise(resolve => {
       const readStream = fs.createReadStream(path.join(this.dir, `${id}.json`));
       stream.set("Content-Type", "application/json");
@@ -29,7 +39,7 @@ class Cache {
     });
   }
 
-  set(id, data) {
+  set(id: string, data: string): Promise<boolean> {
     return new Promise(resolve => {
       fs.writeFile(path.join(this.dir, `${id}.json`), data, err => {
         if (err) {
@@ -41,8 +51,8 @@ class Cache {
     });
   }
 
-  async clearCache() {
-    const clear = async () => {
+  async clearCache(): Promise<void> {
+    const clear = async (): Promise<void> => {
       const dir = await fs.promises.opendir(this.dir);
       for await (const dirent of dir) {
         const filedir = path.join(this.dir, dirent.name);
@@ -59,6 +69,4 @@ class Cache {
   }
 }
 
-module.exports = {
-  Cache
-};
+export default Cache;
