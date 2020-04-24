@@ -4,9 +4,9 @@
   "description": "node js server for ci",
   "main": "server.js",
   "scripts": {
-    "dev": "TS_NODE_FILES=1 nodemon server.ts -r ts-node/register",
+    "dev": "TS_NODE_FILES=1 nodemon src/server.ts -r ts-node/register",
     "build": "tsc -p ../tsconfig.json",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node dist/server.js",
     "test": "jest --rootDir __test__ --runInBand --detectOpenHandles --watch"
   },
   "nodemonConfig": {

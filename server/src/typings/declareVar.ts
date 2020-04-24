@@ -5,6 +5,7 @@ declare const process: {
     gitUrl: string;
     repoName: string;
     mainBranch: string;
+    buildCommand: string;
   };
   checkCommit: NodeJS.Timeout;
   exit(num: number): void;

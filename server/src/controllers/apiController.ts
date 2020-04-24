@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import inst from "../utils/axios-inst";
 import Cache from "../utils/cache";
 import git from "../utils/git";
+import process from "../typings/declareVar";
 
 const cache = new Cache({
-  dir: "../cache",
+  dir: "../../cache",
   timestamp: 3600000
 });
 
@@ -95,7 +96,11 @@ export const getLogs = async (
     });
   }
 };
-export const postSetting = async (req, res) => {
+
+export const postSetting = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { body } = req;
 
   try {
@@ -126,7 +131,7 @@ export const postSetting = async (req, res) => {
 
     await inst.post("/build/request", lastCommit);
 
-    if (process.conf.period > 0) {
+    if (process.conf.period !== undefined && process.conf.period > 0) {
       clearInterval(process.checkCommit);
       process.checkCommit = setInterval(
         git.checkCommit,
@@ -145,7 +150,10 @@ export const postSetting = async (req, res) => {
   }
 };
 
-export const postCommitHash = async (req, res) => {
+export const postCommitHash = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     if (req.body.commitMessage === undefined) {
       const commit = await git.lookup(req.params.commitHash);

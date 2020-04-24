@@ -11,7 +11,7 @@ app.use((req, res, next) => {
   res.set("X-Powered-By", "MoksS");
   next();
 });
-app.use(express.static(join(__dirname, "public")));
+app.use(express.static(join(__dirname, "../public")));
 
 app.use("/api", apiRouter);
 app.use(apiContent);

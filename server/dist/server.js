@@ -1,33 +1,12 @@
 "use strict";
-const { inst } = require("./handlers/axios");
-const git = require("./handlers/git");
-const getRep = async () => {
-    try {
-        const result = await inst.get("/conf");
-        process.conf = result.data.data || {};
-        process.conf.gitUrl = `https://github.com/`;
-        console.log(process.conf);
-        if (process.conf.period === undefined)
-            return;
-        if (process.conf.period > 0) {
-            const lastCommit = await git.lastCommit();
-            process.conf.lastCommitHash = lastCommit.commitHash;
-            process.checkCommit = setInterval(git.checkCommit, process.conf.period * 4000);
-        }
-    }
-    catch (error) {
-        console.log(error);
-        process.conf = {};
-        process.conf.gitUrl = `https://github.com/`;
-    }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-getRep();
-const app = require("./app");
-app.listen(process.env.PORT, err => {
-    if (err) {
-        console.log(err);
-    }
-    else {
-        console.log("Port ", process.env.PORT);
-    }
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./utils/env");
+const getConf_1 = __importDefault(require("./utils/getConf"));
+const app_1 = __importDefault(require("./app"));
+getConf_1.default();
+app_1.default.listen(process.env.PORT, () => {
+    console.log("Port ", process.env.PORT);
 });

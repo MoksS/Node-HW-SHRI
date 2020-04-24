@@ -1,4 +1,9 @@
-const templ = (preloadedState: any) => {
+export interface State {
+  setting: string;
+  repName?: string;
+}
+
+const templ = (preloadedState: State): string => {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.png"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="manifest" href="/manifest.json"/><title>School Ci server</title><link href="/static/css/main.38269bc7.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div class="Page" id="root"></div><script>// WARNING: See the following for security issues around embedding JSON in HTML:
   // https://redux.js.org/recipes/server-rendering/#security-considerations
   window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(

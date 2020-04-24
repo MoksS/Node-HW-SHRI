@@ -10,14 +10,14 @@ const execAsync = util.promisify(exec);
 const clone = async (name: string): Promise<string> => {
   try {
     if (process.conf.repoName !== name) {
-      await execAsync(`rm -rf ./builds/*`);
+      await execAsync(`rm -rf ./../builds/*`);
     } else {
       return "ok";
     }
 
     const repPath = path.resolve(
       __dirname,
-      "../builds",
+      "../../builds",
       name.replace("/", "-")
     );
 
@@ -47,7 +47,11 @@ interface Commit {
 
 const lastCommit = async (): Promise<Commit> => {
   const name = process.conf.repoName;
-  const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
+  const repPath = path.resolve(
+    __dirname,
+    "../../builds",
+    name.replace("/", "-")
+  );
 
   const repo = await git.Repository.open(path.resolve(repPath, ".git"));
   const firstCommit = await repo.getBranchCommit(process.conf.mainBranch);
@@ -64,7 +68,11 @@ const checkLog = async (): Promise<Array<Commit>> => {
   const newCommit: Array<Commit> = [];
   const name = process.conf.repoName;
 
-  const repPath = path.resolve(__dirname, "../builds", name.replace("/", "-"));
+  const repPath = path.resolve(
+    __dirname,
+    "../../builds",
+    name.replace("/", "-")
+  );
 
   const repo = await git.Repository.open(path.resolve(repPath, ".git"));
   await repo.fetchAll();
@@ -121,7 +129,7 @@ const lookup = async (hash: string): Promise<Commit> => {
     const name = process.conf.repoName;
     const repPath = path.resolve(
       __dirname,
-      "../builds",
+      "../../builds",
       name.replace("/", "-")
     );
     const repo = await git.Repository.open(path.resolve(repPath, ".git"));
