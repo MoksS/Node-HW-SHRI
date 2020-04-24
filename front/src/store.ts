@@ -1,15 +1,38 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import allReducers from "./reducers";
 import thunk from "redux-thunk";
+import { Build } from "./reducers/buildList";
+
+interface PreState {
+  setting: string,
+  repName: string,
+  buildList: {
+    build: Array<Build>,
+    finish: Boolean
+  },
+  buildDetails: {
+    commitHash: string,
+    log: string,
+    loading: Boolean
+  }
+}
+
+declare global {
+  interface Window {
+    __PRELOADED_STATE__ : PreState;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 
 // Grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window.__PRELOADED_STATE__
+const preloadedState = window.__PRELOADED_STATE__;
 
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(allReducers, preloadedState,composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(allReducers, preloadedState, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;
 

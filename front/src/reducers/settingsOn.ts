@@ -1,4 +1,8 @@
-const settingsOn = (state = "/" , action) => {
+interface Action {
+  type: string;
+}
+
+const settingsOn = (state: string = "/" , action: Action): string => {
   switch (action.type) {
     case "settingsOn":
       return "/build";

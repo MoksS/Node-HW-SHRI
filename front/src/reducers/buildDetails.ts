@@ -1,4 +1,16 @@
-const buildDetails = (state = {commitHash: "", log: "", loading : true} , action) => {
+import { Build } from "./buildList";
+
+interface BuildDetails extends Build {
+  loading: Boolean;
+  log: string;
+}
+
+interface Action {
+  type: string;
+  build: Build;
+}
+
+const buildDetails = (state = {commitHash: "", log: "", loading : true} , action: Action): BuildDetails => {
   switch (action.type) {
     case "updateDetails":
       return { ...action.build, loading:false};
