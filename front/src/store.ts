@@ -2,24 +2,21 @@ import { createStore, applyMiddleware, compose } from "redux";
 import allReducers from "./reducers";
 import thunk from "redux-thunk";
 import { Build } from "./reducers/buildList";
+import { BuildDetails } from "./reducers/buildDetails";
 
-interface PreState {
+export interface StateInteface {
   setting: string,
   repName: string,
   buildList: {
     build: Array<Build>,
     finish: Boolean
   },
-  buildDetails: {
-    commitHash: string,
-    log: string,
-    loading: Boolean
-  }
+  buildDetails: BuildDetails
 }
 
 declare global {
   interface Window {
-    __PRELOADED_STATE__ : PreState;
+    __PRELOADED_STATE__ : StateInteface;
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }

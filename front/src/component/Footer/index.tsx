@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Footer.scss";
 import "./Link.scss";
 import "./Copyright.scss";
 
-function Footer() {
+const Footer: FC = () => {
   return (
     <footer className="Footer">
       <div className="Footer_Content">

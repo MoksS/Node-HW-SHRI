@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, MouseEvent, FC } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../component/Header";
 import Form from "../component/Form";
@@ -9,14 +9,15 @@ import Text from "../component/Text";
 import { host } from "../helpers/constant";
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
+import { StateInteface } from "../store";
 
-function Settings () {
+const Settings: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const state = useSelector(state => state.setting);
+  const state = useSelector((state: StateInteface) => state.setting);
 
   const [error, setError] = useState("");
-  const formEl = useRef(null);
+  const formEl = useRef<HTMLFormElement>(null);
   useEffect(() => {
     document.title = "Settings";
   }, []);
@@ -25,18 +26,22 @@ function Settings () {
     history.push(state);
   }
 
-  const onSaveClick = async (e) => {
+  const onSaveClick = async (e: MouseEvent<HTMLButtonElement>) => {
     const bt1 = e.currentTarget;
-    const bt2 = bt1.nextSibling;
+    const bt2 = bt1.nextSibling as HTMLButtonElement;
 
     bt1.setAttribute("disabled", "disabled");
     bt2.setAttribute("disabled", "disabled");
 
     try {
-      const formData = new FormData(formEl.current);
-      let jsonObject = {};
+      // Осторожно, КОСТЫЛИ и неправильный код
+      const formData = new FormData(formEl.current!);
+      let jsonObject: any = {};
 
-      for (const [key, value] of formData.entries()) {
+      // вообще без понятия как тут сделать, возможно это решается полностью переписыванием кода
+      const data = formData.entries() as unknown as Array<[string, string | number]>;
+
+      for (const [key, value] of data) {
         if ((key === "repoName" || key === "buildCommand") && value === "") {
           setError("Заполните обязательные поля");
           bt1.removeAttribute("disabled");

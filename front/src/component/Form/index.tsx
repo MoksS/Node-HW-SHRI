@@ -1,7 +1,15 @@
-import React from "react";
+import React, { FC, RefObject } from "react";
 import "./Form.scss";
 
-const Form = ({header, descripton, children, name, formRef, method}) => {
+export interface FormProps {
+  header: string;
+  descripton: string;
+  name: string;
+  method: string;
+  formRef: RefObject<HTMLFormElement>;
+}
+
+const Form: FC<FormProps> = ({header, descripton, children, name, formRef, method}) => {
 
   return (
     <form className="Form" name={name} ref={formRef} method={method} onSubmit={(e) => e.preventDefault()} onClick={(e) => e.preventDefault()}>

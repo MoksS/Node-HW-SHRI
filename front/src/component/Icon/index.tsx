@@ -1,12 +1,17 @@
-import React from "react";
-import { withNaming } from '@bem-react/classname';
+import React, { FC } from "react";
+import cn from "../../helpers/bemCn";
 import "./Icon.scss";
-
-const cn = withNaming({ e: '_', m: '__', v: '-' })
 
 const styles = cn('Icon');
 
-const Icon = (props) => {
+export interface IconProps {
+  style?: {
+    size?: "xs" | "xl";
+    img?: "close" | "control" | "play" | "rebuild";
+  };
+}
+
+const Icon: FC<IconProps> = (props) => {
   let classes;
 
   if (props.style === undefined) {

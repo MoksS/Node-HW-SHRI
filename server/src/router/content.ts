@@ -9,7 +9,6 @@ router.get("/settings", content.getSettings);
 router.get("/build", content.getBuildPage);
 router.get("/build/:buildId", content.getBuildPage);
 router.get("/checkSettings", content.checkSettings);
-router.get("/teststartpageqwert123", content.testStartPage);
 router.get("*", content.getStartPage);
 
 export default router;

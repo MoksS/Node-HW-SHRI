@@ -10,20 +10,23 @@ import Card from "../component/Card";
 import Preloader from "../component/Preloader";
 import { useSelector, useDispatch } from "react-redux";
 import { getBuildDetails, onRebuild } from "../middleware/ajaxRequest";
+import { StateInteface } from "../store";
 
 const convert = new Convert({ newline: true, fg: "#000" });
 
 function BuildDetails() {
   const history = useHistory();
-  const repName = useSelector(state => state.repName);
-  const buildDetails = useSelector(state => state.buildDetails);
+  const repName = useSelector((state: StateInteface) => state.repName);
+  const buildDetails = useSelector((state: StateInteface) => state.buildDetails);
   const dispatch = useDispatch();
   const { number } = useParams();
 
   useEffect(() => {
     document.title = `Build ${number}`;
 
-    dispatch(getBuildDetails(number, history));
+    if (number) {
+      dispatch(getBuildDetails(number, history));
+    }
     // eslint-disable-next-line
   }, [number]);
 

@@ -1,11 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import { withNaming } from '@bem-react/classname';
 
 const cn = withNaming({ e: '_', m: '__', v: '-' })
 
 const styles = cn('ButtonsField');
 
-const ButtonsField = (props) => {
+export interface ButtonsFieldProps {
+  style?: {
+
+  };
+}
+
+
+const ButtonsField: FC<ButtonsFieldProps> = (props) => {
   let classes;
 
   if (props.style === undefined) {

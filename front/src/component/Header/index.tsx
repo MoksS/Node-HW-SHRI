@@ -1,13 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom"
-import { withNaming } from '@bem-react/classname';
+import cn from "../../helpers/bemCn";
 import "./Header.scss";
-
-const cn = withNaming({ e: '_', m: '__', v: '-' })
 
 const Banner = cn('Header', 'Banner');
 
-const Header = (props) => {
+export interface HeadProps {
+  link?: string;
+  text: string;
+  class?: {
+    color?: "black"
+    lineHeight: "l"
+  }; 
+}
+
+const Header: FC<HeadProps> = (props) => {
   let classes;
 
   if (props.class === undefined) {

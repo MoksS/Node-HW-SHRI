@@ -9,9 +9,10 @@ import BuildDetails from './pages/BuildDetails';
 import { host } from "./helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
 import { settingsOn, setName } from "./reducers/actions";
+import { StateInteface } from "./store";
 
 function App() {
-  const state = useSelector(state => state.setting);
+  const state = useSelector((state: StateInteface) => state.setting);
   const dispatch = useDispatch();
 
   useEffect(() => {

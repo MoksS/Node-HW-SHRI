@@ -1,7 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Date.scss";
 
-const Date = (props) => {
+export interface DateProps {
+  startDate: string;
+  duration: string;
+};
+
+const Date: FC<DateProps> = (props) => {
 
   return (
     <div className="Date">

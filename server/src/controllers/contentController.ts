@@ -49,20 +49,9 @@ const checkSettings = (req: Request, res: Response): Response => {
   return res.json(process.conf);
 };
 
-const testStartPage = (req: Request, res: Response): Response => {
-  const preloadState = {
-    setting: "/"
-  };
-
-  const html = pageTemp(preloadState);
-
-  return res.status(200).send(html);
-};
-
 export default {
   getSettings,
   getStartPage,
   checkSettings,
-  getBuildPage,
-  testStartPage
+  getBuildPage
 };

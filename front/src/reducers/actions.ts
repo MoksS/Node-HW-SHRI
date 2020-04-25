@@ -12,14 +12,14 @@ export const settingsOn = () => {
   };
 };
 
-export const updateDetails = (build) => {
+export const updateDetails = (build = []) => {
   return {
     type: "updateDetails", 
     build: build
   };
 }; 
 
-export const setName = (name) => {
+export const setName = (name: string) => {
   return {
     type: "setName", 
     name: name

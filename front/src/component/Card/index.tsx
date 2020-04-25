@@ -1,12 +1,24 @@
-import React from "react";
+import React, { FC } from "react";
 import Date from "../Date";
 import { getDate, getDuration } from "../../helpers/time";
 import "./Card.scss";
 
-const Card = (props) => {
-  const date = getDate(props.start);
+export interface CardProps {
+  start?: string;
+  duration?: number;
+  column?: boolean;
+  status?: string;
+  number?: number;
+  commit?: string;
+  branch?: string;
+  hash?: string;
+  author?: string;
+};
 
-  const duration = getDuration(props.duration);
+const Card: FC<CardProps> = (props) => {
+  const date = getDate(props.start!);
+
+  const duration = getDuration(props.duration!);
 
   const status = `Icon Icon__indentRigth-s Icon__size-default Icon__img-${props.status}`
 

@@ -1,4 +1,4 @@
-import git, { Clone } from "nodegit";
+import git from "nodegit";
 import path from "path";
 import util from "util";
 import { exec } from "child_process";
@@ -10,7 +10,8 @@ const execAsync = util.promisify(exec);
 const clone = async (name: string): Promise<string> => {
   try {
     if (process.conf.repoName !== name) {
-      await execAsync(`rm -rf ./../builds/*`);
+      console.log("work");
+      await execAsync(`rm -rf ./builds/*`);
     } else {
       return "ok";
     }
@@ -21,7 +22,7 @@ const clone = async (name: string): Promise<string> => {
       name.replace("/", "-")
     );
 
-    await Clone.clone(`${process.conf.gitUrl}${name}`, repPath);
+    await git.Clone.clone(`${process.conf.gitUrl}${name}`, repPath);
     process.conf.repoName = name.replace("/", "-");
 
     return "ok";

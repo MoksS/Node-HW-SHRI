@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link, Redirect } from "react-router-dom"
 import Header from "../component/Header";
 import Logo from "../component/Logo";
@@ -6,9 +6,10 @@ import Button from "../component/Button";
 import Icon from "../component/Icon";
 import Text from "../component/Text";
 import {useSelector} from "react-redux";
+import { StateInteface } from "../store";
 
-const StartScreen = () => {
-  const state = useSelector(state => state.setting);
+const StartScreen: FC = () => {
+  const state = useSelector((state: StateInteface) => state.setting);
   
   return(
   state !== "/" ? <Redirect to="/build"/> :

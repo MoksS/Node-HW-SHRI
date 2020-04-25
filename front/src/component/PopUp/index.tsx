@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, FC, MouseEvent } from "react";
 import { useHistory } from "react-router-dom";
 import Form from "./../Form";
 import Input from "./../Input";
@@ -8,13 +8,17 @@ import { host } from "../../helpers/constant";
 import Text from "./../Text";
 import "./PopUp.scss";
 
-const PopUp = ({ hide }) => {
+export interface PopUpProps {
+  hide(event: MouseEvent<HTMLButtonElement>): void;
+}
+
+const PopUp: FC<PopUpProps> = ({ hide }) => {
   const [error, setError] = useState("");
-  const formEl = useRef(null);
+  const formEl = useRef<HTMLFormElement>(null);
   const history = useHistory();
-  const onSaveClick = async (e) => {
+  const onSaveClick= async (e: MouseEvent<HTMLButtonElement> ) => {
     const bt1 = e.currentTarget;
-    const bt2 = bt1.nextSibling;
+    const bt2 = bt1.nextSibling as HTMLButtonElement;
 
     bt1.setAttribute("disabled", "disabled");
     bt2.setAttribute("disabled", "disabled");
@@ -22,7 +26,7 @@ const PopUp = ({ hide }) => {
     try {
       setError("");
 
-      const formData = new FormData(formEl.current);
+      const formData = new FormData(formEl.current!);
 
       const response = await fetch(`${host}/api/builds/${formData.get("commitHash")}`, {
         method: 'POST'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import { Link } from "react-router-dom";
 import Header from "../component/Header";
 import Button from "../component/Button";
@@ -9,16 +9,17 @@ import Card from "../component/Card";
 import PopUp from "../component/PopUp";
 import { useSelector, useDispatch } from "react-redux";
 import { getBuildList } from "../middleware/ajaxRequest";
+import { StateInteface } from "../store";
+import { Build as BuildInteface } from "../reducers/buildList";
 
-const Build = () => {
-  const repName = useSelector(state => state.repName);
-  const buildList = useSelector(state => state.buildList);
+const Build: FC = () => {
+  const repName = useSelector((state: StateInteface) => state.repName);
+  const buildList = useSelector((state: StateInteface) => state.buildList);
   const dispatch = useDispatch();
-  const [popup, setPopup] = useState("");
 
-  const showPopUp = () => {
-    setPopup(<PopUp hide={() => setPopup("")} />)
-  }
+  const [popup, setPopup] = useState(false);
+
+  const showPopUp = () => setPopup(true);
 
   useEffect(() => {
 
@@ -56,7 +57,7 @@ const Build = () => {
       </Header>
 
       <div className="Content">
-        {buildList.build.map(e => (
+        {buildList.build.map((e: BuildInteface) => (
           <Link to={`/build/${e.id}`} key={e.buildNumber}>
             <Card
               status={e.status}
@@ -82,7 +83,11 @@ const Build = () => {
           </ButtonsField>
         }
       </div>
-      {popup}
+      {popup ? 
+        <PopUp hide={() => setPopup(false)} />
+        :
+        ""
+      }
     </>
   )
 };

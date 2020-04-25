@@ -1,20 +1,26 @@
 import { updateList, updateDetails, loading } from "../reducers/actions";
 import { host } from "../helpers/constant";
+import { BuildDetails } from "../reducers/buildDetails"
+
+export interface History {
+  push(url: string): void;
+}
+
 
 export const getBuildList = (offset = 0, limit = 5) => {
-  return dispatch => {
+  return (dispatch: (arg0: { type: string; build: never[]; length: number; }) => void) => {
 
     fetch(`${host}/api/builds?offset=${offset}&limit=${limit}`)
       .then(e => e.json())
-      .then( e => {
+      .then((e) => {
         dispatch(updateList(e.data, limit));
       })
       .catch(error => console.log(error));
   };
 }
 
-export const getBuildDetails = (number, history) => {
-  return async dispatch  => {
+export const getBuildDetails = (number: string, history: History) => {
+  return async (dispatch: (arg0: { type: string; build?: never[]; }) => void)  => {
     try {
       dispatch(loading());
       const [list, log] = await Promise.all([
@@ -35,7 +41,7 @@ export const getBuildDetails = (number, history) => {
   }
 };
 
-export const onRebuild = async (buildDetails, history) => {
+export const onRebuild = async (buildDetails: BuildDetails, history: History) => {
   try {
     const response = await fetch(`${host}/api/builds/${buildDetails.commitHash}`, {
       method: 'POST',

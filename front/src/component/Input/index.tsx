@@ -1,14 +1,28 @@
-import React, { useRef } from "react";
+import React, { useRef, FC } from "react";
 import Button from "./../Button";
 import Icon from "./../Icon";
 import MaskedInput from 'react-text-mask'
 import "./Input.scss";
 
-const Input = (props) => {
-  const inputEl = useRef(null);
+export interface InputProps {
+  bind?: boolean;
+  head?: string;
+  placeholder?: string;
+  id?: string;
+  textMask?: RegExp[];
+  name?: string;
+  value?: string | number;
+  type?: string;
+  span?: string; 
+}
 
-  const clearInput = (e) => {
-    inputEl.current.value = "";
+const Input: FC<InputProps> = (props) => {
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  const clearInput = () => {
+    if (inputEl.current) {
+      inputEl.current.value = "";
+    }
   }
 
   const bindInput = props.bind ? <span className="Input_Bind"> *</span> : "";

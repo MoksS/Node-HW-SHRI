@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Preloader.scss";
 
-const Preloader = () => {
+const Preloader: FC = () => {
   return (
     <div className="sk-center">
       <div className="sk-circle">

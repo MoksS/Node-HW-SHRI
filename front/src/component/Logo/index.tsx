@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import Button from "./../Button";
 import Text from "./../Text";
 import "./Logo.scss";
 
-const Logo = () => (
+const Logo: FC = () => (
   <>
     <div className="Logo">
       <img className="Logo_Img" src="/icon/logo.svg" alt="LOGO" />
