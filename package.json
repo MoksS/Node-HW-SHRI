@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "tsc -watch -p ./",
-    "compile": "tsc -p ./"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MoksS/pattern-in-TS.git"
