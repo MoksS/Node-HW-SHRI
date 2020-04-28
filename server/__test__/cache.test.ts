@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const { Cache } = require("../handlers/cache");
+import fs from "fs";
+import path from "path";
+import Cache from "../src/utils/cache";
 
 const cache = new Cache({
-  dir: "../cache",
+  dir: "../../cache",
   timestamp: 200
 });
 

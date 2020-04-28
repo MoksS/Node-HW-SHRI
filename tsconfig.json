@@ -65,13 +65,13 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [
-    "./server/src/**/*"
+    "./server/**/*",
   ],
   "exclude": [
     "node_modules/",
     "builds/",
     "cache/",
-    "__test__",
+    "__test__/",
     "./hermionaTest/**/*",
     "front"
   ]
