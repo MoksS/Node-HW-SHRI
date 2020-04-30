@@ -64,14 +64,11 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": [
-    "./server/**/*",
-  ],
   "exclude": [
-    "node_modules/",
-    "builds/",
-    "cache/",
-    "__test__/",
+    "node_modules",
+    "builds",
+    "cache",
+    "server/__test__",
     "./hermionaTest/**/*",
     "front"
   ]

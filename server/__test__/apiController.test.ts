@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import * as controller from "../src/controllers/apiController";
 
 jest.mock("../src/utils/axios-inst", () => {
@@ -81,8 +82,12 @@ const res = {
 };
 
 describe("test Api controller", () => {
+  const req = { query: {} };
   it("test getSetting", async () => {
-    const setting = await controller.getSetting(null, res);
+    const setting = await controller.getSetting(
+      req as Request,
+      (res as unknown) as Response
+    );
     expect(setting).toEqual({
       data: {
         id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -96,7 +101,10 @@ describe("test Api controller", () => {
 
   it("test getBuilds", async () => {
     const req = { query: {} };
-    const builds = await controller.getBuilds(req, res);
+    const builds = await controller.getBuilds(
+      req as Request,
+      (res as unknown) as Response
+    );
 
     expect(builds).toEqual({
       data: [
@@ -118,7 +126,10 @@ describe("test Api controller", () => {
 
   it("test getBuildId", async () => {
     const req = { params: { buildId: "880405db-106a-48c0-9a77-0103e11f9fc7" } };
-    const build = await controller.getBuildId(req, res);
+    const build = await controller.getBuildId(
+      (req as unknown) as Request,
+      (res as unknown) as Response
+    );
     expect(build).toEqual({
       data: {
         id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -137,7 +148,10 @@ describe("test Api controller", () => {
 
   it("test getLogs", async () => {
     const req = { params: { buildId: "880405db-106a-48c0-9a77-0103e11f9fc7" } };
-    const log = await controller.getLogs(req, res);
+    const log = await controller.getLogs(
+      (req as unknown) as Request,
+      (res as unknown) as Response
+    );
     expect(log).toEqual({
       data: "Билд не был запущен или не окончен"
     });
