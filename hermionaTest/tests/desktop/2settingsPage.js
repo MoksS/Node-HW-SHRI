@@ -1,7 +1,7 @@
 const assert = require("chai").assert;
 
 describe("Settings Page", () => {
-  it("Тестируем корректность верстки", async function() {
+  it("Корректность верстки", async function() {
     return this.browser.url("/settings").assertView("plain", "body", {
       allowViewportOverflow: true,
       compositeImage: true,
@@ -9,7 +9,7 @@ describe("Settings Page", () => {
     });
   });
 
-  it("тестируем ошибку при неполном вводе полей", async function() {
+  it("Ошибка при неполном вводе полей", async function() {
     const browser = this.browser;
     await browser.setValue(`.Input_Input[name="repoName"]`, "MoksS/repoPage");
     await browser.click(`form button.Button__color-action`);
@@ -17,7 +17,7 @@ describe("Settings Page", () => {
     return assert.equal(text, "Заполните обязательные поля");
   });
 
-  it("проверка очистки полей по нажатию кнопки", async function() {
+  it("Очистки полей по нажатию кнопки", async function() {
     const browser = this.browser;
     await browser.setValue(`.Input_Input[name="repoName"]`, "MoksS/repoPage");
     const valuebefore = await browser.getValue(`.Input_Input[name="repoName"]`);

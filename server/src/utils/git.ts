@@ -10,7 +10,7 @@ const execAsync = util.promisify(exec);
 const clone = async (name: string): Promise<string> => {
   try {
     if (process.conf.repoName !== name) {
-      console.log("work");
+      console.log("delete irrelevant repositories");
       await execAsync(`rm -rf ./builds/*`);
     } else {
       return "ok";

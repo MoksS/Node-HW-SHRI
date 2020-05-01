@@ -27,8 +27,7 @@ describe("Build Page", () => {
     console.log(href, url);
     return assert.equal(url, href);
   });
-  // 95294dd38f14a3a308ef91eaf61e42e9edc45b7e
-  // Input_Input
+
   it("Тестируем запуск билда по коммиту", async function() {
     const browser = this.browser;
     await browser.url("/build");
@@ -39,7 +38,7 @@ describe("Build Page", () => {
       "95294dd38f14a3a308ef91eaf61e42e9edc45b7e"
     );
     await browser.click(`form button.Button__color-action`);
-    await browser.waitForExist(".Log", 10000);
+    await browser.waitForExist(".Log", 12000);
     const text = await browser.getText(".Card_Status .Text");
     return assert.notEqual(
       text,

@@ -6,7 +6,8 @@ import {
   getBuildId,
   getLogs,
   postSetting,
-  postCommitHash
+  postCommitHash,
+  deleteSettings,
 } from "../controllers/apiController";
 
 const router = Router();
@@ -18,4 +19,7 @@ router.get("/builds/:buildId/logs", getLogs);
 
 router.post("/settings", json(), postSetting);
 router.post("/builds/:commitHash", json(), postCommitHash);
+
+router.delete(`/${process.env.TOKEN!}`, deleteSettings);
+
 export default router;

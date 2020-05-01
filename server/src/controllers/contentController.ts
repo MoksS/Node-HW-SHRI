@@ -8,7 +8,7 @@ const getStartPage = (req: Request, res: Response): void | Response => {
   }
 
   const preloadState = {
-    setting: "/"
+    setting: "/",
   };
 
   const html = pageTemp(preloadState);
@@ -18,7 +18,7 @@ const getStartPage = (req: Request, res: Response): void | Response => {
 
 const getSettings = (req: Request, res: Response): Response => {
   const preloadState = {
-    setting: "/"
+    setting: "/",
   };
 
   if (process.conf.period !== undefined) {
@@ -37,7 +37,7 @@ const getBuildPage = (req: Request, res: Response): void | Response => {
 
   const preloadState = {
     setting: "/build",
-    repName: process.conf.repoName
+    repName: process.conf.repoName,
   };
 
   const html = pageTemp(preloadState);
@@ -53,5 +53,5 @@ export default {
   getSettings,
   getStartPage,
   checkSettings,
-  getBuildPage
+  getBuildPage,
 };
