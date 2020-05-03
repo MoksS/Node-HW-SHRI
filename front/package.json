@@ -15,6 +15,7 @@
     "@types/react-router-dom": "^5.1.4",
     "ansi-to-html": "^0.6.14",
     "i": "^0.3.6",
+    "is-promise": "^4.0.0",
     "node-sass": "^4.13.1",
     "npm": "^6.14.4",
     "react": "^16.13.1",
@@ -26,11 +27,15 @@
     "react-text-mask": "^5.4.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.3.0",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-sw": "node ./src/sw-build.js",
+    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
+    "build": "react-scripts build && npm run build-sw && npm run clean-cra-sw",
+    "dev": "npm run build && serve build --cors",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
