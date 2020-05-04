@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from "react-redux";
 import store from "./store";
-import * as serviceWorker from "./serviceWorker";
+import * as SW from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,4 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.register()
+SW.register();

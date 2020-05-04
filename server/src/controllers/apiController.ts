@@ -44,8 +44,9 @@ export const getBuilds = async (
       data: buildList.data.data,
     });
   } catch (error) {
-    return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request",
+    console.log(error);
+    return res.status(404).json({
+      data: "Bad request",
     });
   }
 };
@@ -102,7 +103,7 @@ export const postSetting = async (
   res: Response
 ): Promise<Response> => {
   const { body } = req;
-
+  console.log(body);
   try {
     const clone = await git.clone(body.repoName);
     if (clone !== "ok") {
