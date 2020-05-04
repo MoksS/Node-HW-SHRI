@@ -18,6 +18,7 @@
     "node-sass": "^4.13.1",
     "npm": "^6.14.4",
     "react": "^16.13.1",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
@@ -29,11 +30,12 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
+  "config-overrides-path": "src/config-overrides.js",
   "type": "module",
   "proxy": "http://localhost:3001",
   "eslintConfig": {

@@ -92,8 +92,8 @@ export const getLogs = async (
       data: log.data,
     });
   } catch (error) {
-    return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request",
+    return res.status(404).json({
+      data: "Bad request",
     });
   }
 };

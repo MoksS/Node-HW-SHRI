@@ -1,9 +1,10 @@
 const CACHE = 'static';
 const timeout = 400;
+const url = self.__precacheManifest.map(e => e.url);
 
-self.addEventListener('install', (event) => {
-  console.log("установен");
-});
+self.addEventListener('install', event => 
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(url)))
+);
 
 // При запросе на сервер мы используем данные из кэша и только после идем на сервер.
 self.addEventListener('fetch', (event) => {
@@ -12,7 +13,6 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (event.request.method !== "GET") {
-    console.log("работает", event.request);
     return;
   }
 
