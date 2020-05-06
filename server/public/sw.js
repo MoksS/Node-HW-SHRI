@@ -1,15 +1,42 @@
-importScripts("/precache-manifest.f378b1a6947666fb87944b93c12b1079.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.0775bbf3212b754f585523c32eeec0e4.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 const CACHE = 'static';
 const timeout = 400;
-const url = self.__precacheManifest.map(e => e.url);
-console.log(url);
+let url; 
+
+if (Array.isArray(self.__precacheManifest)) {
+  url = self.__precacheManifest.map(e => e.url);
+} else {
+  url = ["/index.html"];
+}
 
 self.addEventListener('install', event => 
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(url)))
+   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(url)))
 );
 
-// При запросе на сервер мы используем данные из кэша и только после идем на сервер.
+self.addEventListener('activate', async (event) => { 
+  try {
+    const applicationServerKey = urlB64ToUint8Array(
+      "BJdnYn_COyWs3YrWq6DkfdNJpfNRoQQVadk4hKOb0B8D82r91J5gMOQxRXfpPpdsNJo8jo88KK0ElOZa9XHlnH8"
+    )
+    const options = { applicationServerKey, userVisibleOnly: true }
+    const subscription = await self.registration.pushManager.subscribe(options)
+    const response = await saveSubscription(subscription)
+    console.log(response);
+  } catch (err) {
+    console.log('Error', err)
+  }
+});
+
+self.addEventListener("push", (event) => {
+  if (event.data) {
+    console.log("Push event!! ", event.data.text());
+    showLocalNotification("SHRI CI", event.data.text(),  self.registration);
+  } else {
+    console.log("Push event but no data");
+  }
+});
+
 self.addEventListener('fetch', (event) => {
   if (event.request.url.startsWith("chrome-extension")) {
     return;
@@ -67,5 +94,39 @@ async function update(request) {
     console.error(error);
     return;
   }
-
 }
+
+async function saveSubscription(subscription) {
+  const SERVER_URL = 'http://localhost:3000/api/swpush'
+  const response = await fetch(SERVER_URL, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+
+    },
+    body: JSON.stringify(subscription),
+  })
+  return response.json()
+}
+
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
+  const rawData = atob(base64)
+  const outputArray = new Uint8Array(rawData.length)
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i)
+  }
+  return outputArray
+}
+
+function showLocalNotification(title, body, swRegistration) {
+  const options = {
+    body,
+    requireInteraction: true,
+    // не работает, я не понимаю почему, что только не перепробовал, кошмааар
+    icon:  "https://img.icons8.com/dusk/128/000000/yandex-browser.png",
+    image: "https://img.icons8.com/dusk/128/000000/yandex-browser.png"
+  };
+  swRegistration.showNotification(title, options);
+};

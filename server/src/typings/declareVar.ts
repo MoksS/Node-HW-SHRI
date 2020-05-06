@@ -9,6 +9,12 @@ declare const process: {
   };
   checkCommit: NodeJS.Timeout;
   exit(num: number): void;
+  env: {
+    TOKEN: string;
+    PORT: number;
+    PUBLICKEY: string;
+    PRIVATEKEY: string;
+  };
 };
 
 export default process;

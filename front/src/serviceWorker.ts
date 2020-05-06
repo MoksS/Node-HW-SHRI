@@ -46,13 +46,16 @@ export function register(config?: Config) {
         // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, config);
 
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
-          console.log(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
-          );
+        const requestNotificationPermission = async () => {
+          const permission = await window.Notification.requestPermission();
+          if (permission !== 'granted') {
+            console.log("доступ к push уведомлениям запрещен");
+          }
+        }
+
+        navigator.serviceWorker.ready.then((registration) => {
+          console.log("сервис воркер зарегистрирован");
+          requestNotificationPermission();
         });
       } else {
         // Is not localhost. Just register service worker

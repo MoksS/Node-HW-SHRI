@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
+import webpush, { PushSubscription } from "web-push";
 import inst from "../utils/axios-inst";
 import Cache from "../utils/cache";
 import git from "../utils/git";
 import process from "../typings/declareVar";
+
+webpush.setVapidDetails(
+  "mailto:moksshuv@yandex.ru",
+  process.env.PUBLICKEY,
+  process.env.PRIVATEKEY
+);
 
 const cache = new Cache({
   dir: "../../cache",
@@ -200,4 +207,21 @@ export const deleteSettings = async (
       data: "Bad request",
     });
   }
+};
+
+let shitDB: PushSubscription;
+
+export const notify = (req: Request, res: Response): Response => {
+  console.log(req.body);
+  const { buildNumber, status } = req.body;
+  const message = `Build №${buildNumber} ${status}`;
+  console.log(message);
+  webpush.sendNotification(shitDB, message);
+  return res.status(200).send("OK");
+};
+
+export const postSwPush = (req: Request, res: Response): Response => {
+  shitDB = req.body as PushSubscription;
+  console.log(shitDB);
+  return res.status(200).json({ message: "push active" });
 };
