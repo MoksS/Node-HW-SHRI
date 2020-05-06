@@ -8,5 +8,5 @@ const getConf_1 = __importDefault(require("./utils/getConf"));
 const app_1 = __importDefault(require("./app"));
 getConf_1.default();
 app_1.default.listen(process.env.PORT, () => {
-    console.log("Port ", process.env.PORT);
+    console.log(`http://localhost:${process.env.PORT}/`);
 });

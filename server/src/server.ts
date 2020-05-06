@@ -5,5 +5,5 @@ import app from "./app";
 getConf();
 
 app.listen(process.env.PORT, () => {
-  console.log("Port ", process.env.PORT);
+  console.log(`http://localhost:${process.env.PORT}/`);
 });
