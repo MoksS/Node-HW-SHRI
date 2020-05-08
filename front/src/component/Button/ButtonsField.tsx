@@ -7,7 +7,8 @@ const styles = cn('ButtonsField');
 
 export interface ButtonsFieldProps {
   style?: {
-
+    column?: "off",
+    indent?: "topXl"
   };
 }
 

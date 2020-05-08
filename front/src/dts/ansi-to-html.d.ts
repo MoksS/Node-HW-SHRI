@@ -12,7 +12,7 @@ declare module 'ansi-to-html' {
   class Convert {
     constructor(option: option) {
     }
-    toHtml: (input: any) => string;
+    toHtml: (input: string | string[]) => string;
   }
   export = Convert;
 }

@@ -16,7 +16,7 @@ export interface CardProps {
 };
 
 const Card: FC<CardProps> = (props) => {
-  const date = getDate(props.start!);
+  const date = props.start ? getDate(props.start) : false;
 
   const duration = getDuration(props.duration!);
 

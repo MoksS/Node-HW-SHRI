@@ -1,10 +1,7 @@
 import { updateList, updateDetails, loading } from "../reducers/actions";
 import { host } from "../helpers/constant";
-import { BuildDetails } from "../reducers/buildDetails"
-
-export interface History {
-  push(url: string): void;
-}
+import { BuildDetails } from "../reducers/buildDetails";
+import { History } from "history";
 
 
 export const getBuildList = (offset = 0, limit = 5) => {
