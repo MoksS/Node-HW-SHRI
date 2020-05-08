@@ -1,0 +1,18 @@
+interface option {
+  fg?: string;
+  bg?: string;
+  newline?: boolean;
+  escapeXML?: boolean;
+  stream?: boolean;
+  colors?: string[] | {
+    [code: number]: string;
+  };
+}
+declare module 'ansi-to-html' {
+  class Convert {
+    constructor(option: option) {
+    }
+    toHtml: (input: string | string[]) => string;
+  }
+  export = Convert;
+}

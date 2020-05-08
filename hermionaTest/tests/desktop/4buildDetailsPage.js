@@ -7,7 +7,7 @@ describe("Build Details Page", () => {
     return this.browser.assertView("plain", "body", {
       allowViewportOverflow: true,
       compositeImage: true,
-      screenshotDelay: 7000
+      screenshotDelay: 6000
     });
   });
 });
