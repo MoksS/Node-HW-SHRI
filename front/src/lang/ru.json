@@ -1,0 +1,62 @@
+{
+  "Build": {
+    "Button": {
+      "ShowMore": "Показать больше",
+      "RunBuild": "Запуск сборки"
+    }
+  },
+  "BuildDetails": {
+    "Button": {
+      "Rebuild": "Собрать заново"
+    }
+  },
+  "Settings": {
+    "Form": {
+      "header": "Настройки",
+      "descripton": "Настройте параметры подключения к репозиторию и синхронизации."
+    },
+    "Input": {
+      "repoName": {
+        "head": "Репозиторий GitHub",
+        "placeholder": "имя пользователя/имя репозитория"
+      },
+      "buildCommand": {
+        "head": "Команда сборки",
+        "placeholder": "npm ci &amp;&amp; npm run build"
+      },
+      "mainBranch": {
+        "head": "Главная ветвь",
+        "placeholder": "master"
+      },
+      "period": {
+        "head": "Synchronize every",
+        "placeholder": "10"
+      }
+    },
+    "Error": {
+      "invalidInput": "Заполните необходимые поля",
+      "unknown": "потерянно подключение к интернету"
+    },
+    "Button": {
+      "Save": "Сохранить",
+      "Cancel": "Отменить"
+    }
+  },
+  "StartScreen": {
+    "Button": {
+      "Settings": "Настройки"
+    }
+  },
+  "Logo": {
+    "Button": {
+      "OpenSettings": "Открыть  Настройки"
+    },
+    "Text": "Настройка параметров подключения к репозиторию и синхронизации"
+  },
+  "Footer": {
+    "Support": "Поддержка",
+    "Learning": "Обучение",
+    "lang": "English version",
+    "Copyright": "© 2020 MoksS"
+  }
+}
