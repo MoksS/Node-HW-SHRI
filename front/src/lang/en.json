@@ -1,0 +1,67 @@
+{
+  "Build": {
+    "Button": {
+      "ShowMore": "Show more",
+      "RunBuild": "Run build"
+    }
+  },
+
+  "BuildDetails": {
+    "Button": {
+      "Rebuild": "Rebuild"
+    }
+  },
+
+  "Settings": {
+    "Form": {
+      "header": "Settings",
+      "descripton": "Configure repository connection and synchronization settings."
+    },
+
+    "Input": {
+      "repoName": {
+        "head": "GitHub repository",
+        "placeholder": "user-name/repo-name"
+      },
+      "buildCommand": {
+        "head": "Build command",
+        "placeholder": "npm ci && npm run build"
+      },
+      "mainBranch": {
+        "head": "Main branch",
+        "placeholder": "master"
+      },
+      "period": {
+        "head": "Synchronize every",
+        "placeholder": "10"
+      }
+    },
+
+    "Error": {
+      "invalidInput": "Fill in required fields",
+      "unknown": "lost internet connection"
+    },
+
+    "Button": {
+      "Save": "Save",
+      "Cancel": "Cancel"
+    }
+  },
+  "StartScreen": {
+    "Button": {
+      "Settings": "Settings"
+    }
+  },
+  "Logo": {
+    "Button": {
+      "OpenSettings": "OpenSettings"
+    },
+    "Text": "Configure repository connection and synchronization settings"
+  },
+  "Footer": {
+    "Support": "Support",
+    "Learning": "Learning",
+    "lang": "Русская версия",
+    "Copyright": "© 2020 MoksS"
+  }
+}
