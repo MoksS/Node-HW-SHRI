@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
+import webpush, { PushSubscription } from "web-push";
 import inst from "../utils/axios-inst";
 import Cache from "../utils/cache";
 import git from "../utils/git";
 import process from "../typings/declareVar";
 
+webpush.setVapidDetails(
+  "mailto:moksshuv@yandex.ru",
+  process.env.PUBLICKEY,
+  process.env.PRIVATEKEY
+);
+
 const cache = new Cache({
   dir: "../../cache",
-  timestamp: 3600000
+  timestamp: 3600000,
 });
 
 cache.clearCache();
@@ -19,11 +26,11 @@ export const getSetting = async (
     const result = await inst.get("/conf");
 
     return res.status(200).json({
-      data: result.data.data
+      data: result.data.data,
     });
   } catch (error) {
     return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+      data: error.response.statusText || "Bad request",
     });
   }
 };
@@ -41,11 +48,12 @@ export const getBuilds = async (
     );
 
     return res.status(200).json({
-      data: buildList.data.data
+      data: buildList.data.data,
     });
   } catch (error) {
-    return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+    console.log(error);
+    return res.status(404).json({
+      data: "Bad request",
     });
   }
 };
@@ -59,11 +67,11 @@ export const getBuildId = async (
       `/build/details?buildId=${req.params.buildId}`
     );
     return res.status(200).json({
-      data: infoBuild.data.data
+      data: infoBuild.data.data,
     });
   } catch (error) {
     return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+      data: error.response.statusText || "Bad request",
     });
   }
 };
@@ -82,17 +90,17 @@ export const getLogs = async (
     const log = await inst.get(`/build/log?buildId=${req.params.buildId}`);
     if (log.data.length < 1) {
       return res.status(200).json({
-        data: "Билд не был запущен или не окончен"
+        data: "Билд не был запущен или не окончен",
       });
     }
     await cache.set(req.params.buildId, JSON.stringify({ data: log.data }));
 
     return res.status(200).json({
-      data: log.data
+      data: log.data,
     });
   } catch (error) {
-    return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+    return res.status(404).json({
+      data: "Bad request",
     });
   }
 };
@@ -102,13 +110,13 @@ export const postSetting = async (
   res: Response
 ): Promise<Response> => {
   const { body } = req;
-
+  console.log(body);
   try {
     const clone = await git.clone(body.repoName);
     if (clone !== "ok") {
       return res.status(400).json({
         success: false,
-        error: clone
+        error: clone,
       });
     }
 
@@ -118,7 +126,7 @@ export const postSetting = async (
       repoName: body.repoName,
       buildCommand: body.buildCommand,
       mainBranch: body.mainBranch || "master",
-      period: +body.period || 0
+      period: +body.period || 0,
     });
 
     process.conf.repoName = body.repoName;
@@ -141,11 +149,11 @@ export const postSetting = async (
     }
 
     return res.status(200).json({
-      success: true
+      success: true,
     });
   } catch (error) {
     return res.status(error.response.status || 404).json({
-      data: error.response.statusText || "Bad request"
+      data: error.response.statusText || "Bad request",
     });
   }
 };
@@ -165,7 +173,7 @@ export const postCommitHash = async (
       commitMessage: req.body.commitMessage,
       commitHash: req.params.commitHash,
       branchName: req.body.branchName,
-      authorName: req.body.authorName
+      authorName: req.body.authorName,
     });
 
     result.data.data.success = true;
@@ -174,7 +182,46 @@ export const postCommitHash = async (
   } catch (error) {
     console.log(error);
     return res.status(404).json({
-      data: "Bad request"
+      data: "Bad request",
     });
   }
+};
+
+export const deleteSettings = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  console.log("Запрос на удаление настроек");
+  try {
+    const result = await inst.delete("/conf");
+    process.conf = result.data.data || {};
+    process.conf.gitUrl = `https://github.com/`;
+    console.log("Настройки удалены");
+    console.log(process.conf);
+    return res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      data: "Bad request",
+    });
+  }
+};
+
+let shitDB: PushSubscription;
+
+export const notify = (req: Request, res: Response): Response => {
+  console.log(req.body);
+  const { buildNumber, status } = req.body;
+  const message = `Build №${buildNumber} ${status}`;
+  console.log(message);
+  webpush.sendNotification(shitDB, message);
+  return res.status(200).send("OK");
+};
+
+export const postSwPush = (req: Request, res: Response): Response => {
+  shitDB = req.body as PushSubscription;
+  console.log(shitDB);
+  return res.status(200).json({ message: "push active" });
 };

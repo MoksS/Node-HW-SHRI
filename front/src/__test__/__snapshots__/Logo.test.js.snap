@@ -7,7 +7,7 @@ exports[`renders Logo correctly 1`] = `
   <img
     alt="LOGO"
     className="Logo_Img"
-    src="/icon/logo.svg"
+    src="logo.svg"
   />
   <p
     className="Logo_Text"

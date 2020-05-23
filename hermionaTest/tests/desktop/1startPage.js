@@ -1,8 +1,11 @@
 const assert = require("chai").assert;
+const inst = require("../../utils/axios-inst");
 
 describe("Start Page", () => {
   it("Тестируем корректность верстки", async function() {
-    return this.browser.url("/").assertView("plain", "body", {
+    const del = await inst.delete("/");
+    assert.equal(200, del.status);
+    return this.browser.url("http://localhost:3000/").assertView("plain", "body", {
       allowViewportOverflow: true,
       compositeImage: true,
       screenshotDelay: 100

@@ -57,7 +57,12 @@ const Build: FC = () => {
       </Header>
 
       <div className="Content">
-        {buildList.build.map((e: BuildInteface) => (
+        {buildList.build.map((e: BuildInteface) =>{ 
+          if (e.commitHash === undefined) {
+            window.location.reload();
+          }
+
+          return (
           <Link to={`/build/${e.id}`} key={e.buildNumber}>
             <Card
               status={e.status}
@@ -70,7 +75,7 @@ const Build: FC = () => {
               duration={e.duration}
             />
           </Link>
-        )
+        )}
         )}
         {buildList.finish ? "" :
           <ButtonsField>

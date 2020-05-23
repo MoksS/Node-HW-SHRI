@@ -5,10 +5,10 @@
     "prettier/@typescript-eslint",  // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
+  "plugins": ["prettier", "@typescript-eslint"],
   "parserOptions":  {
-    "project": "./tsconfig.json",
+    "project": "server/tsconfig.json",
     "ecmaVersion":  2019,  // Allows for the parsing of modern ECMAScript features
     "sourceType":  "module"  // Allows for the use of imports
   },

@@ -26,7 +26,7 @@ class Cache {
   }
 
   get(id: string, stream: Response): Promise<boolean> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const readStream = fs.createReadStream(path.join(this.dir, `${id}.json`));
       stream.set("Content-Type", "application/json");
       readStream.pipe(stream);
@@ -40,8 +40,8 @@ class Cache {
   }
 
   set(id: string, data: string): Promise<boolean> {
-    return new Promise(resolve => {
-      fs.writeFile(path.join(this.dir, `${id}.json`), data, err => {
+    return new Promise((resolve) => {
+      fs.writeFile(path.join(this.dir, `${id}.json`), data, (err) => {
         if (err) {
           resolve(false);
         } else {
