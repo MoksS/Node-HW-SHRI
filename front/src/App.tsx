@@ -10,12 +10,14 @@ import { host } from "./helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
 import { settingsOn, setName } from "./reducers/actions";
 import { StateInteface } from "./store";
-import en from "./lang/en.json";
 
 function App() {
   const state = useSelector((state: StateInteface) => state.setting);
   const dispatch = useDispatch();
-  console.log(en);
+
+  if (process.env.NODE_ENV === 'development') {
+    window.lang = require('./lang/ru.json');
+  }
 
   useEffect(() => {
     const checkSettings = async () => {

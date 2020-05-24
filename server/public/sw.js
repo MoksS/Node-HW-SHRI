@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.0775bbf3212b754f585523c32eeec0e4.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.e9c00850a407fa0556515929f3701b8e.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 const CACHE = 'static';
 const timeout = 400;
@@ -9,6 +9,38 @@ if (Array.isArray(self.__precacheManifest)) {
 } else {
   url = ["/index.html"];
 }
+
+const saveSubscription = async subscription => {
+  const SERVER_URL = 'http://localhost:3000/api/swpush'
+  const response = await fetch(SERVER_URL, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+
+    },
+    body: JSON.stringify(subscription),
+  })
+  return response.json()
+}
+
+const urlB64ToUint8Array = base64String => {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
+  const rawData = atob(base64)
+  const outputArray = new Uint8Array(rawData.length)
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i)
+  }
+  return outputArray
+}
+
+const showLocalNotification = (title, body, swRegistration) => {
+  const options = {
+    body,
+    icon: "./favicon.png"
+  };
+  swRegistration.showNotification(title, options);
+};
 
 self.addEventListener('install', event => 
    event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(url)))
@@ -31,7 +63,7 @@ self.addEventListener('activate', async (event) => {
 self.addEventListener("push", (event) => {
   if (event.data) {
     console.log("Push event!! ", event.data.text());
-    showLocalNotification("SHRI CI", event.data.text(),  self.registration);
+    showLocalNotification("Yolo", event.data.text(),  self.registration);
   } else {
     console.log("Push event but no data");
   }
@@ -95,38 +127,3 @@ async function update(request) {
     return;
   }
 }
-
-async function saveSubscription(subscription) {
-  const SERVER_URL = 'http://localhost:3000/api/swpush'
-  const response = await fetch(SERVER_URL, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-
-    },
-    body: JSON.stringify(subscription),
-  })
-  return response.json()
-}
-
-function urlB64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/')
-  const rawData = atob(base64)
-  const outputArray = new Uint8Array(rawData.length)
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i)
-  }
-  return outputArray
-}
-
-function showLocalNotification(title, body, swRegistration) {
-  const options = {
-    body,
-    requireInteraction: true,
-    // не работает, я не понимаю почему, что только не перепробовал, кошмааар
-    icon:  "https://img.icons8.com/dusk/128/000000/yandex-browser.png",
-    image: "https://img.icons8.com/dusk/128/000000/yandex-browser.png"
-  };
-  swRegistration.showNotification(title, options);
-};

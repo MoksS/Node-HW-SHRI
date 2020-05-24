@@ -29,10 +29,12 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class= "Page" id="root"></div>
     <script>
-      // WARNING: See the following for security issues around embedding JSON in HTML:
-      // https://redux.js.org/recipes/server-rendering/#security-considerations
       window.__PRELOADED_STATE__ = ${JSON.stringify(
         preloadedState
+      ).replace(/</g, "\\u003c")}
+
+      window.lang = ${JSON.stringify(
+        lang
       ).replace(/</g, "\\u003c")}
       </script>
   </body>

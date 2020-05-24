@@ -17,6 +17,8 @@ const Build: FC = () => {
   const buildList = useSelector((state: StateInteface) => state.buildList);
   const dispatch = useDispatch();
 
+  const { lang } = window;
+
   const [popup, setPopup] = useState(false);
 
   const showPopUp = () => setPopup(true);
@@ -45,7 +47,9 @@ const Build: FC = () => {
             onClick={showPopUp}
           >
             <Icon style={{ size: "xl", img: "play" }} />
-            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Run build</Text>
+            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>
+              {lang.Build.Button.RunBuild}
+            </Text>
           </Button>
 
           <Link to="/settings">
@@ -83,7 +87,9 @@ const Build: FC = () => {
               style={{ color: "control", padding: "action", indentBottom: "xl" }}
               onClick={(e) => dispatch(getBuildList(buildList.build.length))}
             >
-              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Show more</Text>
+              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>
+              {lang.Build.Button.ShowMore}
+              </Text>
             </Button>
           </ButtonsField>
         }

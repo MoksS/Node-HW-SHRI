@@ -15,9 +15,19 @@ const Settings: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const state = useSelector((state: StateInteface) => state.setting);
+  const currentLang = useSelector((state: StateInteface) => state.lang);
 
   const [error, setError] = useState("");
   const formEl = useRef<HTMLFormElement>(null);
+
+  const { lang } = window;
+
+  const [plurObj, setplurObj] = useState({
+    head: lang.Settings.Input.period.head.other,
+    span: lang.Settings.Input.period.span.other
+  })
+
+
   useEffect(() => {
     document.title = "Settings";
   }, []);
@@ -43,7 +53,7 @@ const Settings: FC = () => {
 
       for (const [key, value] of data) {
         if ((key === "repoName" || key === "buildCommand") && value === "") {
-          setError("Заполните обязательные поля");
+          setError(lang.Settings.Error.invalidInput);
           bt1.removeAttribute("disabled");
           bt2.removeAttribute("disabled");
           return;
@@ -86,7 +96,7 @@ const Settings: FC = () => {
       // если упал сервер или пропал интернет - пишешм что то, но не сегодня)
       // отправляем логи
       // и единственное мое универсальное решение, конечно же не идеальное)))
-      setError("Ойейейейей кажется что то случилось");
+      setError(lang.Settings.Error.unknown);
       bt1.removeAttribute("disabled");
       bt2.removeAttribute("disabled");
     }
@@ -95,48 +105,58 @@ const Settings: FC = () => {
     bt2.removeAttribute("disabled");
   };
 
+  const onChangeInput = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = evt.currentTarget;
+    const plural = new Intl.PluralRules(currentLang).select(+value);
+    setplurObj({
+      head: lang.Settings.Input.period.head[plural],
+      span: lang.Settings.Input.period.span[plural]
+    })
+  }
+
   return (
     <>
       <Header text="School CI server" />
 
       <div className="Content">
         <Form
-          header="Settings"
-          descripton="Configure repository connection and synchronization settings."
+          header={lang.Settings.Form.header}
+          descripton={lang.Settings.Form.descripton}
           name="settings"
           method="post"
           formRef={formEl}
         >
 
           <Input
-            head="GitHub repository"
+            head={lang.Settings.Input.repoName.head}
             type="text"
-            placeholder="user-name/repo-name"
+            placeholder={lang.Settings.Input.repoName.placeholder}
             name="repoName"
             bind={true}
           />
 
           <Input
-            head="Build command"
+            head={lang.Settings.Input.buildCommand.head}
             type="text"
-            placeholder="npm ci && npm run build"
+            placeholder={lang.Settings.Input.buildCommand.placeholder}
             name="buildCommand"
             bind={true}
           />
 
           <Input
-            head="Main branch"
+            head={lang.Settings.Input.mainBranch.head}
             type="text"
-            placeholder="master"
+            placeholder={lang.Settings.Input.mainBranch.placeholder}
             name="mainBranch"
           />
 
           <Input
-            head="Synchronize every"
-            placeholder="10"
+            head={plurObj.head}
+            placeholder={lang.Settings.Input.period.placeholder}
             name="period"
-            span="minutes"
+            span={plurObj.span}
             textMask={[/\d/, /\d/]}
+            onChange={onChangeInput}
           />
           <Text style={{size: "l", weight: "normal", lineHeight: "xxl", color: "red"}}>{error}</Text>
 
@@ -145,13 +165,17 @@ const Settings: FC = () => {
               style={{ indentRigth: "s", indentBottom: "s", height: "action", color: "action", padding: "action" }}
               onClick={onSaveClick}
             >
-              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Save</Text>
+              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>
+                {lang.Settings.Button.Save}
+              </Text>
             </Button>
             <Button 
               style={{ color: "control", padding: "action", height: "action", indentBottom: "xl" }}
               onClick={Back}
             >
-              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Cancel</Text>
+              <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>
+                {lang.Settings.Button.Cancel}
+              </Text>
             </Button>
           </ButtonsField>
         </Form>

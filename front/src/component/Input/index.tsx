@@ -14,6 +14,7 @@ export interface InputProps {
   value?: string | number;
   type?: string;
   span?: string; 
+  onChange? (evt :React.ChangeEvent<HTMLInputElement>): void;
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -41,6 +42,7 @@ const Input: FC<InputProps> = (props) => {
             name={props.name}
             defaultValue={props.value}
             placeholderChar={"\u2000"}
+            onChange={props.onChange}
           />
           {/* <input className="Input_Input Input_Input__sizeWidth-small" type="text" maxLength="2" placeholder="10" name="minutes" defaultValue="10" /> */}
         </div>
