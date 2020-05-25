@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.e9c00850a407fa0556515929f3701b8e.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.14545a6c22897b10ff422b56b3795546.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 const CACHE = 'static';
 const timeout = 400;

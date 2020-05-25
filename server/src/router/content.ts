@@ -4,15 +4,11 @@ import content from "../controllers/contentController";
 
 const router = express.Router();
 
-router.get("/ru", content.getStartPage);
-router.get("/ru/settings", content.getSettings);
-router.get("/ru/build", content.getBuildPage);
-router.get("/ru/build/:buildId", content.getBuildPage);
-router.get("/en", content.getStartPage);
-router.get("/en/settings", content.getSettings);
-router.get("/en/build", content.getBuildPage);
-router.get("/en/build/:buildId", content.getBuildPage);
+router.get("/", content.getStartPage);
+router.get("/settings", content.getSettings);
+router.get("/build", content.getBuildPage);
+router.get("/build/:buildId", content.getBuildPage);
 router.get("/checkSettings", content.checkSettings);
-router.get("*", content.redirect);
+router.get("*", content.getStartPage);
 
 export default router;

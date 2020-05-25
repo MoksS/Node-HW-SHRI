@@ -10,13 +10,18 @@ import { host } from "./helpers/constant";
 import { useSelector, useDispatch } from "react-redux";
 import { settingsOn, setName } from "./reducers/actions";
 import { StateInteface } from "./store";
+import enLang from "./lang/en.json";
+import ruLang from "./lang/ru.json";
 
 function App() {
   const state = useSelector((state: StateInteface) => state.setting);
+  const lang = useSelector((state: StateInteface) => state.lang);
   const dispatch = useDispatch();
 
-  if (process.env.NODE_ENV === 'development') {
-    window.lang = require('./lang/ru.json');
+  if (lang === 'en') {
+    window.lang = enLang;
+  } else {
+    window.lang = ruLang;
   }
 
   useEffect(() => {

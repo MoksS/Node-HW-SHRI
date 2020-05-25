@@ -8,6 +8,18 @@ const currentLang = store.getState().lang;
 
 const Footer: FC = () => {
   const { lang } = window;
+
+  const onClickChangeLang = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    evt.preventDefault();
+
+    if (currentLang === 'ru') {
+      localStorage.setItem('lang', 'en');
+    } else {
+      localStorage.setItem('lang', 'ru');
+    }
+
+    window.location.reload();
+  }
   return (
     <footer className="Footer">
       <div className="Footer_Content">
@@ -15,7 +27,8 @@ const Footer: FC = () => {
           <a className="Link_ATag" href="/#">{lang.Footer.Support}</a>
           <a className="Link_ATag" href="/#">{lang.Footer.Learning}</a>
           <a className="Link_ATag" 
-            href={currentLang === 'ru' ? "/en" : "/ru"}
+             href="/#"
+             onClick={onClickChangeLang}
           >
             {lang.Footer.lang}</a>
         </div>
