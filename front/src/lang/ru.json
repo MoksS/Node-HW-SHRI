@@ -22,15 +22,26 @@
       },
       "buildCommand": {
         "head": "Команда сборки",
-        "placeholder": "npm ci &amp;&amp; npm run build"
+        "placeholder": "npm ci && npm run build"
       },
       "mainBranch": {
         "head": "Главная ветвь",
         "placeholder": "master"
       },
       "period": {
-        "head": "Synchronize every",
-        "placeholder": "10"
+        "head": {
+          "one": "Синхронизировать каждую",
+          "many": "Синхронизировать каждые",
+          "few": "Синхронизировать каждые",
+          "other": "Синхронизировать каждые"
+        },
+        "placeholder": "10",
+        "span": {
+          "one": "минуту",
+          "many": "минут",
+          "few": "минуты",
+          "other": "минут"
+        }
       }
     },
     "Error": {
@@ -58,5 +69,22 @@
     "Learning": "Обучение",
     "lang": "English version",
     "Copyright": "© 2020 MoksS"
+  },
+  "PopUp": {
+    "Form": {
+      "header": "Новая Сборка",
+      "descripton": "Введите хэш коммита, который вы хотите собрать."
+    },
+
+    "Input": {
+      "commitHash": {
+        "placeholder": "Хеш коммита"
+      }
+    },
+
+    "Button": {
+      "RunBuild": "Запуск Сборки",
+      "Cancel": "Отмена"
+    }
   }
 }

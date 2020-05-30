@@ -16,6 +16,9 @@ const PopUp: FC<PopUpProps> = ({ hide }) => {
   const [error, setError] = useState("");
   const formEl = useRef<HTMLFormElement>(null);
   const history = useHistory();
+
+  const { lang } = window;
+
   const onSaveClick= async (e: MouseEvent<HTMLButtonElement> ) => {
     const bt1 = e.currentTarget;
     const bt2 = bt1.nextSibling as HTMLButtonElement;
@@ -55,15 +58,15 @@ const PopUp: FC<PopUpProps> = ({ hide }) => {
   return (
     <div className="PopUp">
       <Form
-        header="New Build"
-        descripton="Enter the commit hash which you want to build."
+        header={ lang.PopUp.Form.header }
+        descripton={ lang.PopUp.Form.descripton }
         name="newBuild"
         method="post"
         formRef={formEl}
       >
         <Input
           type="text"
-          placeholder="Commit Hash"
+          placeholder={ lang.PopUp.Input.commitHash.placeholder }
           name="commitHash"
         />
 
@@ -72,12 +75,16 @@ const PopUp: FC<PopUpProps> = ({ hide }) => {
             style={{ indentRigth: "s", indentBottom: "s", height: "action", color: "action", padding: "action" }}
             onClick={onSaveClick}
           >
-            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Run build</Text>
+            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>
+            { lang.PopUp.Button.RunBuild }
+            </Text>
           </Button>
           <Button
             onClick={hide}
             style={{ color: "close", padding: "action", height: "action", indentBottom: "xl" }}>
-            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>Cancel</Text>
+            <Text style={{ size: "m", lineHeight: "xxxxl", weight: "small", color: "default" }}>
+            { lang.PopUp.Button.Cancel }
+            </Text>
           </Button>
         </ButtonsField>
         <Text style={{size: "l", weight: "normal", lineHeight: "xxl", color: "red"}}>{error}</Text>

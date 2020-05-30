@@ -21,6 +21,8 @@ function BuildDetails() {
   const dispatch = useDispatch();
   const { number } = useParams();
 
+  const { lang } = window;
+  
   useEffect(() => {
     document.title = `Build ${number}`;
 
@@ -44,7 +46,9 @@ function BuildDetails() {
             onClick={() => onRebuild(buildDetails, history)}
           >
             <Icon style={{ size: "xl", img: "rebuild" }} />
-            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Rebuild</Text>
+            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>
+              {lang.BuildDetails.Button.Rebuild}
+              </Text>
           </Button>
           <Link to="/settings">
             <Button style={{ color: "control", indentLeft: "s", height: "default" }}>

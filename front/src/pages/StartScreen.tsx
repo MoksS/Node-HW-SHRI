@@ -11,6 +11,8 @@ import { StateInteface } from "../store";
 const StartScreen: FC = () => {
   const state = useSelector((state: StateInteface) => state.setting);
   
+  const { lang } = window;
+
   return(
   state !== "/" ? <Redirect to="/build"/> :
     <>
@@ -18,7 +20,9 @@ const StartScreen: FC = () => {
         <Link to="/settings">
           <Button style={{ color: "control", padding: "control", height: "default" }}>
             <Icon style={{ size: "xl", img: "control" }} />
-            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>Settings</Text>
+            <Text style={{ size: "m", lineHeight: "xxl", weight: "small", color: "default", hide: "on" }}>
+              {lang.StartScreen.Button.Settings}
+            </Text>
           </Button>
         </Link>
       </Header>

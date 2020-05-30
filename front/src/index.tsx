@@ -4,6 +4,7 @@ import App from './App';
 import { Provider } from "react-redux";
 import store from "./store";
 import * as SW from "./serviceWorker";
+import '@formatjs/intl-pluralrules/polyfill';
 
 ReactDOM.render(
   <React.StrictMode>

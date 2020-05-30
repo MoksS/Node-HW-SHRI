@@ -32,8 +32,15 @@
         "placeholder": "master"
       },
       "period": {
-        "head": "Synchronize every",
-        "placeholder": "10"
+        "head": {
+          "one": "Synchronize every",
+          "other": "Synchronize every"
+        },
+        "placeholder": "10",
+        "span": {
+          "one": "minute",
+          "other": "minutes"
+        }
       }
     },
 
@@ -54,7 +61,7 @@
   },
   "Logo": {
     "Button": {
-      "OpenSettings": "OpenSettings"
+      "OpenSettings": "Open Settings"
     },
     "Text": "Configure repository connection and synchronization settings"
   },
@@ -63,5 +70,22 @@
     "Learning": "Learning",
     "lang": "Русская версия",
     "Copyright": "© 2020 MoksS"
+  },
+  "PopUp": {
+    "Form": {
+      "header": "New Build",
+      "descripton": "Enter the commit hash which you want to build."
+    },
+
+    "Input": {
+      "commitHash": {
+        "placeholder": "Commit Hash"
+      }
+    },
+
+    "Button": {
+      "RunBuild": "Run build",
+      "Cancel": "Cancel"
+    }
   }
 }

@@ -11,7 +11,8 @@ export interface StateInteface {
     build: Array<Build>,
     finish: Boolean
   },
-  buildDetails: BuildDetails
+  buildDetails: BuildDetails,
+  lang: string
 }
 
 declare global {
